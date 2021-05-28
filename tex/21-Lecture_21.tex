@@ -1,0 +1,169 @@
+
+
+
+
+\section{Lecture 21 - 12.04.21}
+
+Recall from the beginning of the course that if $C$ and $D$ are plane curves of degree $s$ and $t$ respectively, then they hopefully intersect in $s\cdot t$ points. We found some obstructions for this being the case, so we have to be a bit careful. These obstructions were: 
+
+\begin{enumerate}
+    \item No common components
+    \item The field $k$ must be algebraically closed
+    \item The curves must be projective curves
+    \item We need to count intersection with multiplicity
+\end{enumerate}
+
+So far in this course we have covered points 1, 2 and 3, so in order to make Bézout's theorem precise we now turn our heads to point 4.  
+
+\subsection{Intersection multiplicity}
+
+Lets start by examining an example. Let our two plane curves be defined by $C=V(Y-X^2$ and $D_\lambda=V(Y-\lambda$ for some $\lambda\in k$. We then have 
+\begin{equation*}
+    C\cap D_\lambda = V(Y-X^2, Y-\lambda)
+\end{equation*}
+
+Let $I_\lambda = (Y-\lambda, X^2-\lambda)$ and $A_\lambda= k[X, Y]/I_\lambda$. Note that $A_\lambda\cong k[X]/(X^2-\lambda)$. 
+
+We have two cases, $\lambda \neq 0$ or $\lambda = 0$. If $\lambda \neq 0$ then there is some $a\in k$ such that $\lambda = a^2$, which means 
+\begin{equation*}
+    A_\lambda= k[X]/(X^2-a^2)=k[X]/(X-a)(X+a)\cong k\times k
+\end{equation*}
+The last isomorphism is given by
+\begin{align*}
+    k[X]/(X-a)(X+a) &\longrightarrow k\times k \\
+    1&\longmapsto (1, 1) \\
+    x&\longmapsto (a, -a)
+\end{align*}
+
+\todo[inline]{Check that this is a ring iso}
+
+Hence $C\cap D_\lambda$ has the structure of an affine algebraic variety. It consists of two points, as $A_\lambda$ is a 2-dimensional vector space. 
+
+If $\lambda = 0$ then 
+\begin{equation*}
+    A_0 = k[X, Y]/(X^2-Y, Y)\cong k[X]/(x^2) = k[\epsilon]
+\end{equation*}
+
+which gives us that $I(C\cap D_0)=\sqrt{I_0}=(X, Y)$. This means that $C\cap D_0$ only has one point, as its coordinate ring is just $k$. 
+
+So what is the solution to this problem? We must define $C\cap D_0$ as a finite scheme, rather that a variety. This will allow us to have coordinate ring $A_0$, which is 2-dimensional, which means we have the correct number of points. 
+
+\begin{definition}[Finite scheme]
+A finite scheme $(Z, \O_Z)$ is a ringed space such that $Z$ is a finite discrete set, and $\O_Z(P)$ is a local $k$-algebra that is finite dimansional as a vector space for each point $P\in Z$.
+\end{definition}
+
+\begin{definition}
+Let $(Z, \O_Z)$ be a finite scheme. The multiplicity of $Z$ at a point $P\in Z$ is 
+\begin{equation*}
+    \mu_P(Z)=\dim_k\O_Z(P).
+\end{equation*}
+\end{definition}
+
+\begin{problem}
+Show that a finite algebraic variety is a finite scheme where all multiplicities are $1$. 
+\end{problem}
+
+\begin{proposition}
+Let $(Z,\O_Z)$ be a finite scheme. Then for every subset $V\subseteq Z$ we have 
+\begin{equation*}
+    \Gamma(V, \O_Z)=\prod_{p\in V}\O_Z(P).
+\end{equation*}
+Moreover, given a finite set $Z$, if we assign to each point in it a local finite $k$-algebra, then the formula above defines a finite scheme structure on $Z$.
+\end{proposition}
+Note that for a point $\{P\}\subseteq \{P, Q\}$ we get a projection $\O_Z(P)\times\O_Z(Q)\longrightarrow \O_Z(P)$. 
+\begin{problem}
+Do the above proof. It should follow from generalizing the note above. 
+\end{problem}
+\todo[inline]{Proof}
+
+\begin{definition}
+Let $(Z,\O_Z)$ be a finite scheme and $A=\O_Z(Z)=\Gamma(Z,\O_Z)$. Then $Z=\Spec A$, so 
+\begin{equation*}
+    (Z,\O_Z) = (\Spec A, \O_{\Spec A}).
+\end{equation*}
+\end{definition}
+
+Note that a finite scheme $(\Spec A, \O_{\Spec A})$ is an algebraic variety if and only if $A$ is a reduced $k$-algebra. 
+
+\begin{problem}
+Find a finite scheme structure on a single point $\{P\}\in k^2$. As a finite scheme structure is an assignement of a finite dimensional local $k$-algebra to each point, we only need one to have a finite scheme structure.  
+\end{problem}
+\begin{solution}
+\begin{itemize}
+    \item $(\{P\}, k[X,Y]/(X,Y))$ 
+    \item $(\{P\}, k[X,Y]/(X^2,Y)$
+    \item $(\{P\}, k[X,Y]/(X^4,Y^7)$
+\end{itemize}
+\end{solution}
+
+As we wanted to use this new gadget to study the intersection points of curves we need to be able to define an finite scheme structure on the intersection of projective plane curves. We will do this by first looking at defining such a structure on the intersection of affine plane curves. 
+
+Let $F,G\in k[X,Y]$ be non-zero and without any common factors. We showed earlier that $Z=V(F,G)=V(F)\cap V(G)$ is finite set, and that $k[X,Y](F,G)$ is a finite $k$-algebra. 
+
+\begin{proposition}
+Let $(X, \O_X)$ be an irreducible addine algebraic variety. Set $R=\Gamma(X)$ and let $I\subseteq R$ be an ideal such that $Z=V(I)$ is finite. Set $\F = \widetilde{R/I}$. For a standard open set $D(f)\subseteq X$ we have that
+\begin{enumerate}
+    \item $D(f)\cap Z = \emptyset \implies \F(D(f))=0$
+    \item $D(f)\cap Z = \{x\} \implies \F(D(f))=\O_X(x)/I\O_X(x)$ 
+    \item $D(f)\cap Z = \{x_1, \ldots, x_n\} \implies \F(D(f)) = \prod_{i=1}^n \O_X(x_i)/I\O_X(x_i)$. 
+\end{enumerate}
+\end{proposition}
+
+We can use this to define a sheaf of rings $\O_Z$ on $Z$ by $\Gamma(U, \O_Z) = \prod_{x\in U} \O_X(x)/I\O_X(x)$. In this case $\F=i_*\O_Z$, where $i\colon Z\hookrightarrow X$ is the inclusion. Then we have that $(Z, \O_Z)$ is a finite scheme, which we denote by $\Spec R/I$. 
+
+\begin{problem}
+Prove the above.
+\end{problem}
+\todo[inline]{Proof}
+
+Let now $F, G\in k[X, Y]$ be non-zero with no common factors and set $Z=V(F, G)$, $I(F, G)$ and $R=k[X, Y]$. Then $(Z, \O_Z)$ is a finite scheme as above. For $P\in k^2$ we have $\O_Z(P) = \O_{k^2}(P)/(F, G)$ and 
+\begin{equation*}
+    k[X, Y]/(X, Y) = \prod_{P\in Z}\O_{k^2}(P)/(F, G) = \O_Z(Z).
+\end{equation*}
+
+\begin{definition}[Intersection multiplicity]
+The intersection multiplicity of the plane curves $F$ and $G$ is 
+\begin{equation*}
+    \mu_P(F, G)=\mu_P(Z)=\sim_k(\O_Z(P)=\dim \O_{k^2}(O)/(F, G) = \dim k[X, Y]_P/(F, G)
+\end{equation*}
+\end{definition}
+
+\begin{corollary}
+\begin{equation*}
+    \sum_{P\in V(F, G)}\mu_P(F, G) = \dim_k k[X, Y]/(F,G)
+\end{equation*}
+\end{corollary}
+
+Note that this does not give us Bézout's theorem, as this may still miss points at infinity. Take for example $F=X$ and $G=X-1$. 
+
+\begin{problem}
+What is the intersection multiplicity of $F=X^3-X^2-Y$ and $G=Y$ at the points $P=(0,0)$ and $Q=(1,0)$?
+\end{problem}
+\begin{solution}
+We have $V(F, G)=V(X^3-X^2-Y, Y)$, so
+\begin{equation*}
+    k[X, Y]/(X^3-X^2-Y, Y)\cong k[X]/(X^3-X^2)=k[X]/(X^2(X-1)).
+\end{equation*}
+Now, localizing at the point $P$ is the same as localizing at the ideal $(X)$. This means that we invert everything not in $(X)$, hence $(X-1)$ becomes invertible. We then have
+\begin{equation*}
+    k[X]_{(X)}/(X^2(X-1))\cong k[X]/(X^2)
+\end{equation*}
+which is 2-dimensional.
+
+If we instead localize at $Q$, then this is the same as localizing at the ideal $(X-1)$. This means inverting everything not in the ideal, hence $X^2$ becomes invertible. We then get 
+\begin{equation*}
+    k[X]_{(X-1)}/(X^2(X-1))\cong k[X]/(X-1)
+\end{equation*}
+which is 1-dimensional. 
+
+This means that the intersection multiplicity at $P$ is 2, and at $Q$ it is 1. 
+\end{solution}
+
+But, for Bézouts theorem to work we need that the curves are projective, so we need to have a definition for this as well. 
+
+\begin{definition}[Projective intersection multiplicity]
+Let $F, G\in k[X, Y, T]$ be homogeneous, non-zero elements of degree $s$ and $t$ respectively with no common factors. Let $P=(X, Y, 1)\in \P^2$ and define the intersection multiplicity of $F$ and $G$ at $P$ by
+\begin{equation*}
+    \mu_P(F, G) = \mu_{(X, Y)(F_b, G_b)}. 
+\end{equation*}
+\end{definition}

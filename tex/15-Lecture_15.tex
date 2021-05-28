@@ -1,0 +1,153 @@
+
+\section{Lecture 15 - 02.03.21}
+
+\subsection{Sheaves of modules on varieties}
+Let $(V, \O_V)$ be an affine algebraic variety. Recall that $\O_V(D(f))=\Gamma(V)_f$. Set $A=\O(V)=\Gamma(V, \O_V)$, which we call the global sections, and let $\F$ be an $\O_V$-module. In particular $\F(V)$ is an $A$-module. 
+
+A question we want to answer is weather we can create $\O_V$-modules from an $A$-module.
+
+\begin{definition}
+Let $M$ be an $A$-module. Define an $\O_V$-module $\widetilde{M}$ by $\widetilde{M}(D(f))=M_f$ for $f\in A$. 
+\end{definition}
+
+Notice that $M_f = M\otimes_A A_f$, so this could also be used as an alternative definition. Notice also that we have $\widetilde{M}(V)=M$. 
+
+\begin{problem}
+What is $\widetilde{A}?$ 
+\end{problem}
+\begin{solution}
+$\widetilde{A}=\O_V$.
+\end{solution}
+
+\begin{problem}
+Check that $\widetilde{M}$ is a sheaf. This should be a similar proof as for $\O_V$ being a sheaf, but carrying the tensor around.
+\end{problem}
+
+\begin{proposition}
+The assignment
+\begin{align*}
+    A-\text{modules}&\longrightarrow \O_V-\text{modules} \\
+    M &\longmapsto \widetilde{M}
+\end{align*}
+is functorial, exact and preserves direct sums and tensor products. 
+\end{proposition}
+\begin{proof}
+This is true because the localization functor has these properties. 
+\end{proof}
+
+\begin{definition}
+Let $\F$ be an $\O_V$-module. We say $\F$ is quasi-coherent if $\F\cong \widetilde{M}$ for some $A$-module $M$ and coherent if this $M$ is finitely generated. 
+\end{definition}
+
+Hence we have an equivalence of categories between the category of $A$-modules and the category of quasi-coherent sheaves on $V$, $QCoh(V)$. 
+
+\begin{problem}
+Check that $QCoh(V)$ is a category, and that the above described functor indeed gives an equivalence of categories. 
+\end{problem}
+
+\begin{definition}
+Let $(X, \O_X)$ be an algebraic variety and $\F$ an $\O_X$-module. We say $\F$ is quasi-coherent if $\exists$ an open affine cover $X=\bigcup U_i$ such that $\F_{\vert U_i}\cong \widetilde{M_i}$ for some $\O_X(U_i)$-module $M_i$. 
+
+Equivalently we could define it to be quasi-coherent if for any open set $U\subset X$ we have $\F_{\vert U}\cong \widetilde{M}$ for some $\O_X(U)$-module $M$. 
+
+We say $\F$ is coherent if in either of the above definitions either all the $M_i$'s or all the $M$'s are finitely generated modules. 
+\end{definition}
+
+\begin{proposition}
+Let $(X, \O_X)$ be an algebraic variety and let $\F$ and $\G$ be quasi-coherent sheaves on $X$. Then $\F\otimes\G$ is again quasi-coherent. 
+\end{proposition}
+\begin{proof}
+For any open set $U\subseteq X$ consider 
+\begin{equation*}
+    (\F\otimes_{\O_X}\G)_{\vert U} \cong \F_{\vert U}\otimes_{\O_U}\G_{\vert U}
+\end{equation*}
+These are both sheaves with the same underlying presheaf, namely the assignment $W\longmapsto \F(W)\otimes_{\O_X(W)}\G(W)$. Hence they are isomorphic. 
+
+Let $U\subseteq X$ be open affine. As $\F$ and $\G$ are quasi-coherent, we can find $A$-modules $M$ and $N$ such that $\F_{\vert U}\cong \widetilde{M}$ and $\G_{\vert U}\cong \widetilde{N}$. Thus
+\begin{equation*}
+    (\F\otimes_{\O_X}\G)_{\vert U} \cong \F_{\vert U}\otimes_{\O_U}\G_{\vert U}\cong \widetilde{M}\otimes_{\O_U}\widetilde{N}\cong \widetilde{ M\otimes_{\O_U(U)}N}
+\end{equation*}
+Where the last isomorphism comes from $M\otimes_A N\otimes A_f\cong (M\otimes_A A_f)\otimes_{A_f}(N\otimes_A A_f)$.  
+\end{proof}
+
+\begin{example}
+Let $(X, \O_X)$ be an algebraic variety, then $\O_X$ is coherent. This holds because for any affine open set $U\subseteq X$ we have that $\O_{X\vert U}=\widetilde{\O_{X\vert U}(U)}$ is a finitely generated module over itself. 
+\end{example}
+
+
+\subsection{Projective varieties}
+
+Let $k$ be an algebraically closed field and $V\subseteq \P^n(k)$ be a projective algebraic set. Our goal is to look at $\O_V$ and to show that $(V, \O_V)$ is an algebraic variety. 
+
+\begin{definition}
+Let $R$ be a graded ring and $f$ a degree $d$ homogeneous element. Then $R_f$ is graded, and $deg(\frac{g}{f^r}) = deg(g)-r\cdot d$. The degree zero component is denoted by $(R_f)_0$. 
+\end{definition}
+
+\begin{definition}
+The structure sheaf $\O_V$ for $V$ is defined as 
+\begin{equation*}
+    \O_V(D^+(f)) = (\Gh(V)_f)_0
+\end{equation*}
+where $f$ is homogeneous of positive degree. 
+\end{definition}
+
+\begin{problem}
+Show that $\O_V$ is a sheaf.
+\end{problem}
+\begin{solution}
+It is a presheaf because for $D^+(f)\subseteq D^+(g)$ we have $V\setminus \Vp(f)\subseteq V\setminus \Vp(g)$ which again means that $\Vp(g)\subseteq \Vp(f)$. By the projective nullstellensatz we then have $(f)\subseteq \sqrt{(g)}$, which means there is an $h$ such that $f^r=g\cdot h$. 
+
+The restriction maps are then
+\begin{align*}
+    (\Gh(V)_g)_0 &\longrightarrow (\Gh(V)_f)_0 \\
+    \frac{u}{g^i}&\longmapsto \frac{u h^i}{f^{ni}}
+\end{align*}
+Then sheaf condition is the same as for the affine case.
+\end{solution}
+
+To prove that this sheaf makes our projective algebraic set into an algebraic variety we need to show it is locally isomorphic to an affine algebraic variety. This isomorphism is as ringed spaces, so we need to know what such a map is.
+
+\begin{definition}
+A morphism of ringed spaces
+\begin{equation*}
+    (\phi, \phi^\#)\colon (X, \O_X)\longrightarrow (Y, \O_Y)
+\end{equation*}
+is a continuous map $\phi\colon X\longrightarrow Y$ of topological spaces, and a map $\phi^\#\colon \O_Y\longrightarrow \phi_*\O_X$ of schemes. Here the map of schemes is often thought of as a pullback. 
+\end{definition}
+
+
+We also need the concept of homogenization and dehomogenization. These processes are morphisms between $k[X_0, \ldots, X_n]$ and $k[X_1, \ldots, X_n]$. Dehomogenization, denoted by $^b(-)$ is defined by $^b(F(X_0, \ldots, X_n))= F(1, X_1, \ldots, X_n)$. Homogenization is a bit more difficult, but we describe it by an example. The homogenization, denoted $^h(-)$, of the element $X_1+X_2^3+X_3^4 \in k[X_1, X_2, X_3]$ is $X_0^3X_1 + X_0X_2^3+X_3^4$. It finds the greatest degree and multiplies the other components by $X_0$ until it gets to that degree. 
+
+\begin{proposition}
+Let $V\subseteq \P^n(k)$ be a projective algebraic set. Then $(V, \O_V)$ is an algebraic variety. 
+\end{proposition}
+\begin{proof}
+We reduce to only proving t for $V=\P^n(k)$. 
+
+Cover $\P^n(k)$ by $D^+(X_i)$. We will show that $D^+(X_0)$ is an affine algebraic variety. By transferring the same argument over a homography, this is also sufficient. 
+
+Set $U_0 = D^+(X_0)=\{ [x_0:\cdots :x_n]\in \P^n(k) \,\vert x_0\neq 0 \}$. We have earlier seen that we have a bijection $j\colon k^n\longrightarrow U_0$, given by sending $(a_1, \ldots, a_n)$ to $[1:a_1:\cdots :x_n]$. 
+
+We claim that $(k^n, \O_{k^n})\overset{(j, j^\#)}\longrightarrow (U_0, \O_{\P^n(k)\vert U_0}$ is an isomorphism of ringed spaces.
+
+If $D^+(F)\subseteq U_0$ where $F\in k[X_0, \ldots, X_n]$ is homogeneous, then $j^{-1}(D^+(F))=j^{-1}(D^+(F))\cap U_0 = D(^bF)$, which means $j$ is continuous. We also have $j(D(f)=D^+(^h f)\cap U_0$, hence $j^{-1}$ is also continuous, meaning that $j$ is a homeomorphism. 
+
+For $W\subseteq V$ open in $\P^n(k)$ we have 
+\begin{center}
+\begin{tikzcd}
+\O_{\P^n(k)\vert U_0}(V\cap U_0) \arrow[r, "\cong"] \arrow[d] & \O_{k^n}(j^{-1}(V\cap U_0)) \arrow[d] \\
+\O_{\P^n(k)\vert U_0}(W\cap U_0) \arrow[r, "\cong"]           & \O_{k^n}(j^{-1}(W\cap U_0))          
+\end{tikzcd}    
+\end{center}
+
+We need to show there is an isomorphism $\O_{\P^n(k)}(D^+(F)\cap U_0)\cong \O_{k^n}(D(^bF))$. Notice here that the latter is just $k[X_1, \ldots, X_n]_{^b F}$, while the former is $(k[X_0, \ldots, X_n]_{FX_0})0$. Hence we define, for a homogeneous element $p$ with $deg(p)=r (deg(F) +1)$, the map
+\begin{align*}
+    \phi\colon (k[X_0, \ldots, X_n]_{FX_0})_0 
+    &\longrightarrow k[X_1, \ldots, X_n]_{^b F} \\
+    \frac{p}{F^rX_0^r}
+    &\longmapsto \frac{^b p}{^b(F^r X_0^r)} = \frac{^b p}{^b F^r}
+\end{align*}
+which is an isomorphism. Hence $j^\#$ is an isomorphism of sheaves, and we are done.
+\end{proof}
+
+We say an algebraic variety is a projective algebraic variety, or sometimes a projective variety, if it is of the form from the above proposition. 

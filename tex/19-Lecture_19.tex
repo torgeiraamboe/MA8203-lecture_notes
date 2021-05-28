@@ -1,0 +1,236 @@
+
+
+
+
+\section{Lecture 19 - 22.03.21}
+
+
+\todo[inline]{Add drawing of tangent space for intuition}
+
+For most points on a algebraic variety $V$ we expect that $\dim T_a W = \dim V$, i.e. that the dimension of the tangent space at that point is the same as the dimension of the variety. However it can also happen that $\dim T_b W\geq \dim W$. Such points $b$ will be called a singular point, while $a$ will be non-singular, or regular. 
+
+We can also study these properties through $\O_{V, a}$ and $\O_{W, b}$. Both these will be local rings, but $\O_{V, a}$ will be regular and $\O_{W, b}$ will not be. This is also the justification for the name regular. 
+
+\subsection{Motivation for tangent spaces}
+
+Let $f(x_1, \ldots, x_n)\in C^\infty$ i.e. a real valued infinitely differentiable function. Let also $S=V(f)\subseteq \R^n$ and $a\in S$. 
+
+\textbf{Question:} What is the tangent space of $S$ at $a$?
+
+We can use Taylors formula at $x=a+h$ to get
+\begin{align*}
+    f(x) 
+    &= f(a) + \sum_{i=1}^n h_i \frac{\partial f}{\partial x_i}(a)+\frac{1}{2}\sum_{i,j}h_i h_j \frac{\partial^2 f}{\partial x_i \partial x_j}(a)+\ldots
+\end{align*}
+Since $a\in S$ we know that $f(a)=0$. This gives us an approximation of $f$ by a ``tangent hyperplane''. We ignore the higher order terms and look only at 
+\begin{align*}
+    \sum_{i=1}^n h_i \frac{\partial f}{\partial x_i}(a_1, \ldots, a_n) 
+    = \sum_{i=1}^n (x_i-a_i) \frac{\partial f}{\partial x_i}(a_1, \ldots, a_n) = 0
+\end{align*}
+
+\begin{example}
+Let $V = V(Y-X^2)\subseteq \R^2$ and $a = (0,0)$. 
+\todo[inline]{drawing of V}
+
+Then we have 
+\begin{equation*}
+    (x-0)\frac{\partial f}{\partial x}(0) + (y-0)\frac{\partial f}{\partial y}(0) = 0.
+\end{equation*}
+This gives us
+\begin{equation*}
+    x(2x)(0) + y(1)(0) = y = 0
+\end{equation*}
+meaning that we must have $y=0$, as would be the expected tangent space.
+\end{example}
+
+In the more standard setting of Euclidean space we can use wording like $h$ is small, or converges to zero. In algebraic geometry we replace ``small/close'' by something called infinitesimal deformations in order to have greater generality and applicability to more fields than just $\R$. The idea is to replace $a+h$ by $a+b\epsilon$ where $b\in k^n$ and $\epsilon \neq 0$ such that $\epsilon^2 = 0$. Hence we work in $k[\epsilon] = k[x]/x^2$. 
+
+Note that $k[\epsilon]$ is not a reduced algebra, hence it does not actually correspond to an algebraic variety itself. 
+
+\subsection{Tangent spaces}
+
+Let $V$ be an affine algebraic variety with $x\in V$. Recall that points in algebraic varieties correspond to maximal ideals in $\Gamma(V)$. These maximal ideals are kernels of morphisms of algebras $\Gamma(V)\longrightarrow k$, more precisely of the characters, i.e. maps $\chi_x(f) = f(x)$. 
+
+So an inclusion $x\rightarrow V$ correspond to projection $\chi_x\colon \Gamma(V)\longrightarrow k$. 
+
+Intuitively we want to replace ``point'' $P$ by ``fat point'' $P_\epsilon$ in order to gain a notion of ``closeness''.
+
+Here ``fat points'' $P_\epsilon$ corresponds to the algebra $\Gamma(P_\epsilon) = k[\epsilon] = k[x]/x^2$. 
+
+\begin{definition}[Deformation]
+A deformation of an affine algebraic variety $V$ at a point $x$ is a morphism of ringed spaces 
+\begin{equation*}
+    t\colon P_\epsilon\longrightarrow V
+\end{equation*}
+given by $t(P_\epsilon) = x$. The set of deformations of $V$ at $x$ is denoted by $\Def(V, x)$. 
+\end{definition}
+
+Equivalently we can define a deformation in terms of $\Gamma(V)$. It is then defined as a $k$-algebra morphism 
+\begin{equation*}
+    t^*\colon \Gamma(V)\longrightarrow k[\epsilon]
+\end{equation*}
+such that 
+\begin{center}
+\begin{tikzcd}
+\Gamma(V) \arrow[rr, "t^*"] \arrow[rd, "\chi_x"'] &   & {k[\epsilon]} \arrow[ld, "\pi"] \\
+                                                  & k &                                
+\end{tikzcd}    
+\end{center}
+commutes. The set of deformations is then denoted by $\Def(\Gamma(V), x)$. 
+
+Since the above diagram commutes, and $\pi$ is a projection, we can write
+\begin{equation*}
+    t^*(f) = f(x) + V_t(f)\epsilon
+\end{equation*}
+where $V_t(f)\in k$, and hence that $t^* = \chi_x + V_t\epsilon$. 
+
+Note that
+\begin{align*}
+    t^*(fg) 
+    &= t^*(f)t^*(g) \\
+    &= (f(x)+V_t(f)\epsilon)(g(x)+V_t(g)\epsilon) \\
+    &= f(x)g(x) + f(x)V_t(g)\epsilon + g(x)V_t(f)\epsilon + V_t(f)V_t(g)\epsilon^2 \\
+    &= f(x)g(x) + f(x)V_t(g)\epsilon + g(x)V_t(f)\epsilon
+\end{align*}
+and hence that
+\begin{equation*}
+    V_t(fg) = f(x)V_t(f) + g(x)V_t(f)
+\end{equation*}
+which is a certain kind of nice function called a derivation.
+
+\begin{definition}[Derivation]
+Let $A$ be a $k$-algebra and $M$ an $A$-module. A map $D\colon A\longrightarrow M$ is a derivation if 
+\begin{itemize}
+    \item $D$ is $k$-linear
+    \item We have $D(ab)=aD(b)+bD(a)$
+\end{itemize}
+We denote the set of derivations between $A$ and $M$ by $\Der(A, M)$.
+\end{definition}
+
+\begin{example}
+The map 
+\begin{align*}
+    k[x_1, \ldots, x_n]&\longrightarrow k[x_1, \ldots, x_n] \\
+    F&\longmapsto \frac{\partial F}{\partial X_i}
+\end{align*}
+is a derivation. This is also the intuition for the name. 
+\end{example}
+
+\begin{definition}[Tangent space]
+Let $V$ be an affine algebraic variety and $x\in V$. The tangent space of $V$ at $x$ is defined by 
+\begin{equation*}
+    T_x V = \Der(\Gamma(V), k)
+\end{equation*}
+where the module action of $\Gamma(V)$ on $k$ is defined by $f\cdot \lambda = f(x)\lambda$. 
+\end{definition}
+
+\begin{proposition}
+The tangent space of an algebraic variety $V$ at a point $x$ is also given by $\Def(V, x)$.
+\end{proposition}
+\begin{proof}
+\begin{equation*}
+    \Def(V, x)\cong Def(\Gamma(V), x)\cong \Der_k(\Gamma(V), k) = T_x V
+\end{equation*}
+where the maps are given by $t\longmapsto t^*\longmapsto V_t$. 
+\end{proof}
+
+Note that a morphism $\phi\colon V\longrightarrow W$ of affine algebraic varieties induces morphisms
+\begin{align*}
+    \Def(V, x)&\longrightarrow \Def(W \phi(x)) \\
+    t&\longmapsto t\phi
+\end{align*}
+and 
+\begin{align*}
+    T_x V&\longrightarrow T_{\phi(x)} W \\
+    V_t&\longmapsto V_t \phi^*
+\end{align*}
+
+\begin{example}
+Let $V=V(Y-X^2)\subseteq \R^2$ and $a=(0,0)$. Then
+\begin{align*}
+    T_{(0,0)}V(Y-X^2) 
+    &= \Der(\R[X,Y](Y-X^3), \R) \\
+    &\cong \Def(\R[X,Y](Y-X^3), (0,0))
+\end{align*}
+where $\Def(\R[X,Y](Y-X^3), (0,0))$ is the set of $k$-algebra morphisms such that $X\longmapsto b\epsilon$ and $Y\longmapsto c\epsilon$. But notice that $Y-X^2$ projects to $c\epsilon - b^2\epsilon^2 = c\epsilon$ in $k$ but gets sent to $0$ in $k[\epsilon]$, hence we must have $c = 0$. 
+
+This gives us that $T_{(0,0)} V = \{(b,0)\} = V(Y)$, which is what we expected, and what we got in the motivation as well. 
+\end{example}
+
+\begin{example}
+Let now $V=k^n$ and $a=(a_1, \ldots, a_n)$. Then 
+\begin{align*}
+    T_a k^n 
+    &\cong \Def(k[X_1, \ldots X_n], k[\epsilon]) \\
+    &= \{ t^*\colon k[X_1, \ldots, X_n]\to k[\epsilon], X_i\mapsto a_i + b_i\epsilon \} \\
+    &\cong \{ (b_1, \ldots, b_n)\in k^n \}
+    &= k^n
+\end{align*}
+\end{example}
+
+\begin{example}
+Let $V\subseteq k^n$ be an algebraic variety with $I(V) = (F_1, \ldots, F_r)$ and $a=(a_1, \ldots, a_n)\in V$. We want to find the tangent space $T_a V$. 
+
+Consider the deformation 
+\begin{center}
+\begin{tikzcd}
+{k[X_1, \ldots, X_n]/(F_1, \ldots, F_r)} \arrow[rr, "t^*"] \arrow[rd, "\chi_x"'] &   & {k[\epsilon]} \arrow[ld, "\pi"] \\
+                                                                                 & k &                                
+\end{tikzcd}    
+\end{center}
+with $t^*(x_i) = a_i+b_i\epsilon$ and such that $F_j(a+b\epsilon)=0$. Then
+\begin{equation*}
+    \sum_{i=1}^n b_i \frac{\partial F_j}{\partial X_j}(a_1, \ldots, a_n) = 0
+\end{equation*}
+for all $j=1,\ldots, r$. But notice that this is exactly the condition that the Jacobian of $(F_1, \ldots F_r)$ is zero in $a$. Recall that the Jacobian is the matrix 
+\begin{equation*}
+J_x(F_1, \ldots, F_r) = 
+\begin{bmatrix}
+\frac{\partial F_1}{\partial X_1}(x) &\cdots &\frac{\partial F_1}{\partial X_n}(x) \\
+\vdots      &       & \vdots \\
+\frac{\partial F_r}{\partial X_1})(x) &\cdots   &\frac{\partial F_r}{\partial X_n}(x)
+\end{bmatrix}
+\end{equation*}
+which is a map $k^n\longrightarrow k^r$. Hence we have 
+\begin{equation*}
+    T_a V = \Ker J_a(F_1, \ldots F_r)
+\end{equation*}
+\end{example}
+
+This is an important observation, and it makes it much simpler to calculate tangent spaces of varieties. Lets try this method on the earlier example of $V = V(Y-X^2)$. We get
+\begin{align*}
+    T_(0,0) V(Y-X^2) 
+    &= \Ker J_{(0,0)}(Y-X^2) \\
+    &= \Ker [-2x, 1] \\
+    &= [0,1] \\
+    &= V(Y)
+\end{align*}
+which is exactly the same as we have gotten before, but this time the calculation was much simpler. 
+
+\begin{problem}
+Try repeating this for another couple curves.
+\end{problem}
+
+\begin{proposition}
+Let $V$ be an affine algebraic variety and $x\in V$ with corresponding maximal ideal $m_x$. Then there is a isomorphism of vector spaces
+\begin{equation*}
+    T_x V \cong Hom_k (m_x / m_x^2, k).
+\end{equation*}
+\end{proposition}
+\begin{proof}
+Let $v\colon \Gamma(V)\longrightarrow k$ be an element of $T_x V$. Let $v_{|m_x}\colon m_x\longrightarrow k$ be its restriction to the maximal ideal corresponding to $x$. 
+
+Note that for $f, g\in m_x$ we have $v(fg) = f(x)v(g) + g(x)v(f) = 0$ because $f(x) = 0 = g(x)$. hence there exists a map $\overline{v}\colon m_x/m_x^2\longrightarrow k$.
+
+On the other hand, if $\theta \in Hom_k(m_x/m_x^2, k)$ then define $v(f) = \theta(\overline{f-f(x)})$. It can be checked that this is a derivation and thus an element in the tangent space. 
+\end{proof}
+
+\begin{corollary}
+If $(\O_{V, x}, m_{V, x})$ is the local ring of $V$ at $x$, then $T_x V = Hom_k(m_{V, x}/m_{V, x}^2, k)$. 
+\end{corollary}
+
+\begin{problem}
+Note that $m_{V, x} = m_x\O_{V, x}$ so there is actually something to prove in the above corollary. Do this proof. 
+\end{problem}
+
+This now means that the tangent space only depends on the local ring of $V$ at $x$, which maybe should not be surprising as it should intuitively model local behaviour of the variety. This also means that we can define tangent spaces for arbitrary algebraic varieties, not just affine ones. 

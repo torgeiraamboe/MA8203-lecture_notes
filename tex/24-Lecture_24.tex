@@ -1,0 +1,185 @@
+
+
+\section{Lecture 24 - 20.04.21}
+
+\subsection{Sheaf cohomology}
+
+Let $(X, \O_X)$ be an algebraic variety. Recall that if we have an exact sequence of $\O_X$-modules
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \F \arrow[r] & \G \arrow[r] & \H \arrow[r] & 0
+\end{tikzcd}    
+\end{center}
+Then we get an exact sequence
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \Gamma(X,\F) \arrow[r] & \Gamma(X,\G) \arrow[r, "\pi"] & \Gamma(X,\H)
+\end{tikzcd}    
+\end{center}
+where $\pi$ need not be surjective. This means that the functor $\Gamma(X, -)\colon \O_X-mod\longrightarrow Ab$ may not be a right exact functor. 
+
+\subsubsection{Cech cohomology}
+
+Let $X$ be some topological space, $\F$ a sheaf of abelian groups on $X$ and $U=\{U_i\}_{i=0}^n$ an open cover of $X$. Define a complex of abelian groups $C^*(U,\F)$ for $0\leq p\leq n$ by
+\begin{equation*}
+    C^*(U,\F) = \prod_{i_0<\cdots<i_p}\F(U_{i_0}\cap \cdots \cap \F(U_{i_p})
+\end{equation*}
+where the differetial is defined by 
+\begin{align*}
+    C^p(U,\F)&\longrightarrow C^{p+1}(U,\F) \\
+    s_{i_0\cdots i_p}&\longmapsto \sum_{k=0}^{p+1}(-1)^k s_{i_0\cdots \hat{i_k}\cdots i_{p+1} \vert U_{i_0}\cap \cdots \cap U{i_{p+1}}}
+\end{align*}
+where $\hat{i_k}$ means that we omit that index. This gives us the complex
+\begin{equation*}
+    0\longrightarrow \prod_{i=0}^n \F(U_i) \longrightarrow \prod_{i_0 <i_1}\F(U_{i_0}\cap U_{i_1}) \longrightarrow \cdots \longrightarrow \F(U_0\cap \cdots \cap U_n) \longrightarrow 0
+\end{equation*}
+
+For $n=1$ we get the following complex:
+\begin{equation*}
+    0\to \F(U_0)\times \F(U_1)\to \F(U_0\cap U_1)\to 0
+\end{equation*}
+and the differential $d^0$ is given by 
+\begin{equation*}
+        \begin{bmatrix}
+        s_0 \\
+        s_1 \\
+    \end{bmatrix}
+    \longmapsto
+    \begin{bmatrix}
+        (s_{\hat{1}0}-s_{1\hat{0}})_{\vert U_0\cap U_1}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        (s_1-s_0)_{\vert U_0\cap U_1} \\
+    \end{bmatrix}
+\end{equation*}
+It is trivially a complex, as any way to compose to differentials must include one copy of the trivial map.
+
+For $n=2$ we get: 
+\begin{equation*}
+    0\to \F(U_0)\times \F(U_1)\times \F(U_2) \to \F(U_0\cap U_1)\times \F(U_0\cap U_2)\times \F(U_1\cap U_2) \to \F(U_0\cap U_1 \cap U_2) \to 0
+\end{equation*}
+We can explicitly describe $d^0$ by 
+\begin{equation*}
+    \begin{bmatrix}
+        s_0 \\
+        s_1 \\
+        s_2
+    \end{bmatrix}
+    \longmapsto
+    \begin{bmatrix}
+        (s_{\hat{1}0}-s_{1\hat{0}})_{\vert U_0\cap U_1} \\
+        (s_{\hat{0}2}-s_{0\hat{2}})_{\vert U_0\cap U_2} \\
+        (s_{\hat{1}2}-s_{1\hat{2}})_{\vert U_1\cap U_2}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        (s_1-s_0)_{\vert U_0\cap U_1} \\
+        (s_2-s_0)_{\vert U_0\cap U_2} \\
+        (s_2-s_1)_{\vert U_1\cap U_2}
+    \end{bmatrix}
+\end{equation*}
+
+\begin{problem}
+Check that this is in fact a complex.
+\end{problem}
+
+\begin{definition}[\Cech cohomology]
+We call this complex the \Cech complex of the space $X$. Its cohomology groups 
+\begin{equation*}
+    \check{H}^p(U,\F) = \Ker d^p/\Ima d^{p+1}
+\end{equation*}
+are called the Cech cohomology groups of $X$.
+\end{definition}
+
+Note that when we are working in algebraic geometry we need to choose the covering to be an open affine covering. 
+
+\begin{proposition}
+$\cH^0(U,\F) \cong \Gamma(X,\F)$.
+\end{proposition}
+\begin{proof}
+\begin{align*}
+    \check{H}^0(U,\F) 
+    &= H^0(C^*(U,\F)) \\
+    &= \Ker(d^0\colon C^0(U,\F)\to C^1(U,\F)) \\
+    &= \{ (s_i)_{i_0}^n \in \prod_{i=0}^n \F(U_i) \,\vert\, (s_i)_{U_i\cap U_j} = (s_j)_{U_i\cap U_j} \, \forall i,j\}
+\end{align*}
+As $\F$ is a sheaf, these local sections $s_i\in \F(U_i)$ can be glued uniquely to a global section $s\in \F(X)$. As we have $\F(X)=\Gamma(X,\F)$ we indeed have $\cH^0(U,\F)\cong \Gamma(X,\F)$. 
+\end{proof}
+
+\begin{theorem}
+Let $X$ be an affine algebraic variety. Furthermore we let $A=\Gamma(X)$, $M$ be an $A$-module, $\F = \widetilde{M}$ and $U=\{U_i\}_{i=0}^m$ an open cover of standard open affine sets. Then for $p>0$ we have $\check{H}^p(U,\F)=0$. 
+\end{theorem}
+
+\begin{corollary}
+If $X$ is an affine algebraic variety, and
+\begin{equation*}
+    0\longrightarrow \F\longrightarrow\G\longrightarrow\H\longrightarrow 0
+\end{equation*}
+an exact sequence of quasi-coherent sheaves, then there is an exact sequence 
+\begin{equation*}
+    0\longrightarrow \Gamma(X,\F)\longrightarrow \Gamma(X,\G)\longrightarrow \Gamma(X,\H)\longrightarrow 0.
+\end{equation*}
+\end{corollary}
+
+\begin{definition}[Separated algebraic variety]
+Let $X$ be an algebraic variety. We say $X$ is separated if the diagonal $\Delta$ is closed in $X\times X$.
+\end{definition}
+
+Notice that this is not the same as being Hausdorff, as the topology on $X\times X$ is not the product topology. 
+
+If $X$ is a separated algebraic variety and $U,V\subseteq X$ are open affine, then their intersection $U\cap V$ is again open affine!
+
+\begin{example}
+All affine algebraic varieties, and all projective algbraic varieties are separated. 
+\end{example}
+
+\begin{theorem}
+Let $X$ be a separated algebraic variety, $U$ a finite open cover and 
+\begin{equation*}
+    0\longrightarrow \Gamma(X,\F)\longrightarrow \Gamma(X,\G)\longrightarrow \Gamma(X,\H)\longrightarrow 0    
+\end{equation*}
+an exact sequence of quasi-coherent sheaves on $X$. Then 
+\begin{equation*}
+    0\to \cH^0(U,\F)\to \cH^0(U,\G) \to \cH^0(U,\H) \to \cH^1(U,\F) \to \cdots
+\end{equation*}
+is a long exact sequence. 
+\end{theorem}
+\begin{proof}
+There exists an exact sequence of complexes 
+\begin{equation*}
+    0\longrightarrow C^*(X,\F)\longrightarrow C^*(X,\G)\longrightarrow C^*(X,\H)\longrightarrow 0
+\end{equation*}
+which we can apply general techniques from homological algebra to to get the correct long exact sequence. 
+
+The above sequence is exact, because it is exact in each degree.
+\end{proof}
+
+We know that $\cH^0(U,\F) \cong \Gamma(X,\F)$, and putting this together with the long exact sequence above we get that \Cech cohomology actually measures the failure of the global sections functor $\Gamma(X,-)$ to be right exact. 
+
+As this makes \Cech cohomology the derived functor of the global sections functor, we get that the construction is in fact independent of the cover we chose! Hence we can denote the cohomology by $\cH(X,\F)$. Note that there may be some niceness conditions on $X$ and $F$ in order to get this to work. 
+
+\subsection{Vanishing theorems}
+
+\begin{theorem}
+Let $V$ be a separated algebraic variety of dimension $n$ and let $\F$ be a quasi-coherent sheaf on $V$. Then $\cH(V,\F)=0$ for $i> n$. 
+\end{theorem}
+
+\begin{theorem}
+Let $S = k[X_0,\cdots,X_n]$. Then 
+\begin{enumerate}
+    \item $\cH^0(\P^n,\O_{\P^n}(d)) = S_d$
+    \item $\cH^i(\P^n,\O_{\P^n}(d)) = 0$ for $0<i<n$
+    \item $\cH^n(\P^n,\O_{\P^n}(d)) = \cH^0(\P^n,\O_{\P^n}(-d-n-1))$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Look at the the sequence
+\begin{equation*}
+    0\to \prod S_{x_i}\to \prod_{i<j}S_{x_i x_j} \to\cdots\to S_{x_0\cdots x_n}\to 0
+\end{equation*}
+\end{proof}
+
+\begin{problem}
+Look at and prove the above theorem for $n=1$ in detail. Use it to compute $\cH^1(\P^1,\O_{\P^1}$. 
+\end{problem}

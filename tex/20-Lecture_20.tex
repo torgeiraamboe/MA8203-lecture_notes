@@ -1,0 +1,212 @@
+
+
+
+\section{Lecture 20 - 23.03.21}
+
+\begin{definition}
+Let $V$ be an irreducible algebraic variety and $x\in V$. We say $x$ is smooth or regular, or that $V$ is non-singular at $x$ if 
+\begin{equation*}
+    \dim V = \dim_k T_x V.
+\end{equation*}
+A point that is not non-singular is called singular. 
+\end{definition}
+
+Note: We always have $\dim V \leq \dim_k T_x V$ and $\dim_x V \leq \dim_k T_x V$, where
+\begin{equation*}
+    \dim_x V = \sup\{\dim V_i\}
+\end{equation*}
+where $V_i$ is an irreducible component or $V$ containing $x$. 
+
+\begin{example}
+Let $V = V(Y^2-X^3)$. We have $\kdim(k[X, Y]/(Y^2-X^3))=1$, and hence that $\dim V = 1$. Lets see how the tangent spaces relate to this dimension. The tangent space at the origin is given by
+\begin{align*}
+    T_{(0,0)} V 
+    &= \Ker J_{(0,0)}(Y^2-X^3) \\
+    &= \Ker [-3x^2 (0), 2y(0)] \\
+    &= \Ker [0,0] \\
+    &= k^2
+\end{align*}
+while the tangent space at some non zero point $(a, b)\neq (0,0)$ is given by
+\begin{align*}
+    T_{(a, b)} V
+    &= \Ker J_{(a, b)}(Y^2 - X^3) \\
+    &= \Ker [-3a^2, 2b] \\
+    &\cong k
+\end{align*}
+We see that $(0,0)$ is the only singular point. 
+\end{example}
+
+
+\begin{theorem}
+Let $V\subseteq k^n$ be an irreducible affine algebraic variety. Assume $I(V)=(F_1, \ldots, F_r)$. Then $V$ is non-singular at a point $x$ if and only if $\rank J_x(F_1, \ldots, F_r) = n-\dim V$. 
+\end{theorem}
+\begin{proof}
+We know that $V$ is non-singular at $x$ if $\dim V = \dim_k T_x V$, which is given by 
+\begin{align*}
+    \dim_k T_x V 
+    &= \dim_k\Ker J_x(F_1, \ldots, F_r) \\
+    &= n-\rank J_x(F_1, \ldots, F_r)
+\end{align*}
+where the last equality is due to the rank-nullity theorem from linear algebra. 
+\end{proof}
+
+\begin{corollary}
+If $F(X, Y)$ is a polynomial without any common factors, i.e. $I(V(F))=(F)$, then a point $(a, b)$ is singular in $V(F)$ if and only if
+\begin{equation*}
+    \frac{\partial F}{\partial X}(a, b) = 0 = \frac{\partial F}{\partial Y}(a, b)
+\end{equation*}
+\end{corollary}
+\begin{proof}
+The proof is an exercise.
+\end{proof}
+\todo[inline]{Do the proof}
+
+\begin{example}
+Let $F(X, Y) = X^3+Y^3-XY$ and $V=V(F)$. Then both
+\begin{align*}
+    \frac{\partial F}{\partial X} &= 3X^2-Y \\
+    \frac{\partial F}{\partial Y} &= 3^2 -X
+\end{align*}
+are zero at the point $(0,0)$. Thus $V$ is singular at $(0,0)$. 
+\end{example}
+
+\begin{proposition}
+Let $V\subseteq \P^n(k)$ be an irreducible projective algebraic variety and $x=[x_0:\ldots:x_n]\in V$ with $x_0\neq 0$. Let further $I(V)=(F_1, \ldots, F_r)$ with $F_i$ homogeneous. 
+
+Define
+\begin{equation*}
+    A(x) = 
+    \begin{bmatrix}
+    \frac{\partial F_1}{\partial X_0}(x) &\cdots &\frac{\partial F_1}{\partial X_n}(x) \\
+    \vdots & &\vdots \\
+    \frac{\partial F_r}{\partial X_0}(x) &\cdots &\frac{\partial F_r}{\partial X_n}(x)
+    \end{bmatrix}
+\end{equation*}
+Then $V$ is non-singular at $x$ if and only if $\rank A(x) = n-\dim V$. 
+\end{proposition}
+
+\begin{proof}
+As $x_0\neq 0$ we can without loss of generality assume that $x = [1:x_1:\cdots :x_n]$. Observe that $x$ is regular if and only if $(x_1, \ldots, x_n)$ is a regular point of $V^b = V\cap D^+(X)$ and $I(V^b) = (F_1^b, \ldots, F_r^b)$. So $(x_1, \ldots, x_n)$ is regular in $V^b$ if and only if
+\begin{equation*}
+    \rank J_{(x_1, \ldots, x_n)}(F_1^b, \ldots, F_r^b) = n-\dim V
+\end{equation*}
+
+Note that if $F$ is a homogeneous polynomial, then
+\begin{equation*}
+    \frac{\partial F}{\partial X_j}(x) = \frac{\partial F^b}{\partial X_i}(x_1, \ldots, x_n)
+\end{equation*}
+and so we get that
+\begin{equation*}
+    A(x) = 
+    \begin{bmatrix}
+    \frac{\partial F_i}{\partial X_0} &\vert & J_{(x_1, \ldots, x_n)}(F_1^b, \ldots, F_r^b)
+    \end{bmatrix}
+\end{equation*}
+Hence we must have $\rank A(x)\geq \rank J_{(x_1, \ldots, x_n)}(F_1^b, \ldots, F_r^b)$. Then Euler's formula gives us that 
+\begin{equation*}
+    d\cdot F = \sum_{j=0}^n x_j \frac{\partial F}{\partial X_j}.
+\end{equation*}
+Now, if $\deg F_i = d_i$, then 
+\begin{equation*}
+    d_i F_i = \sum_{j=1}^r x_j\frac{\partial F_i}{\partial X_j}(x)
+\end{equation*}
+which gives us that
+\begin{equation*}
+    \frac{\partial F_i}{\partial X_0}(x) = d_i F_i(x) - \sum_{j=1}^n x_j \frac{\partial F_i}{\partial X_j}(x)
+\end{equation*}
+Which again must mean that the first column of $A(x)$ is given by 
+\begin{equation*}
+    \begin{bmatrix}
+    A_1
+    \end{bmatrix}
+    =
+    -\sum x_j
+    \begin{bmatrix}
+    \frac{\partial F_1}{\partial X_j}(x) \\
+    \vdots \\
+    \frac{\partial F_r}{\partial X_j}(x)
+    \end{bmatrix}
+\end{equation*}
+which means that $\rank A(x) = \rank J_{(x_1, \ldots, x_n)}(F_1^b, \ldots, F_r^b) = n-\dim V$.
+\end{proof}
+
+\begin{problem}
+Let $V = V(Y^2 T - X(X-T)(X-\lambda T)\subseteq \P^2(k)$. For what values of $\lambda$ is $V$ smooth?
+\end{problem}
+\begin{solution}
+We look at $T=1$ in affine space. We have 
+\begin{equation*}
+    J_x(Y^2 T - X(X-1)(X-\lambda) = [-3X^2+2(\lambda-1)X+\lambda, 2Y](x)
+\end{equation*}
+For $x=(0,0)$ we have 
+\begin{align*}
+    J_{(0,0)}(Y^2 T - X(X-1)(X-\lambda) 
+    &= [-3X^2+2(\lambda-1)X+\lambda, 2Y](0,0) \\
+    &= [\lambda, 0]
+\end{align*}
+So if we set $\lambda = 0$, then $\Ker J_{(0,0)} = k^2$ which means that $V$ is singular at that point. 
+
+For $x=(1,0)$ we have
+\begin{align*}
+    J_{(0,0)}(Y^2 T - X(X-1)(X-\lambda) 
+    &= [-3X^2+2(\lambda-1)X+\lambda, 2Y](1,0) \\
+    &= [-3+2(\lambda - 1)+\lambda, 0] \\
+    &= ??
+\end{align*}
+Which means if we set $\lambda = 1$ then $V$ is again singular at $(1,0)$. 
+
+This means that $V$ is smooth, i.e. consists of only regular points when $\lambda \neq 0$ and $\lambda \neq 1$. 
+\end{solution}
+
+
+
+\subsection{Regular local rings}
+
+Let $(A, m, k)$ be a local ring. Then 
+\begin{enumerate}
+    \item $m/m^2 (\cong m\otimes_A k)$ is a vector space over $k$.
+    \item $\dim_k m/m^2 \geq \kdim A$. 
+\end{enumerate}
+
+\begin{definition}
+We say $A$ is a regular ring if we have equality in point $2$ above. 
+\end{definition}
+
+\begin{example}
+The ring $A=k[[X,Y]]$ with $m=(X, Y)$ is a regular ring.
+\end{example}
+
+Note that all regular rings are domains.  Also, the number $\dim_k m/m^2$ also equals the minimal number of generators og $m$. Thus $A$ is regular if and only if $m$ is generated by $\kdim A$ number of elements. 
+
+\begin{proposition}
+Let $V$ be an algebraic variety and $x\in V$. Then $V$ is regular at $x$ if and only if $\O_{V,x}$ is a regular ring.
+\end{proposition}
+\begin{proof}
+This proof is an exercise.
+\end{proof}
+\todo[inline]{Do the proof}
+
+\begin{proposition}
+A point at the intersection of two irreducible components must be singular.
+\end{proposition}
+\begin{proof}
+This proof is an exercise.
+\end{proof}
+\todo[inline]{Do the proof}
+
+
+\subsection{Curves}
+
+Recall that a curve is an equidimensional algebraic variety of dimension $1$. 
+
+\begin{proposition}
+Let $C$ be a curve and $x\in C$. Then $x$ is non-singular if and only if $\O_{C,x}$ is a local pricipal ideal domain (PID). 
+\end{proposition}
+
+\begin{theorem}
+Let $C$ be an irreducible affine curve. Then $C$ is smooth if and only if $\Gamma(C)$ is integrally closed. 
+\end{theorem}
+
+\begin{example}
+Let $V = V(Y^2-X^3)$. We have that $\frac{Y}{X}\in \Fr(\Gamma(V))$ but $(\frac{Y}{X})^2 -X = 0$, hence not an integral element. This means that $\Gamma(V)$ is not integrally closed, and by the last theorem there must exist some point $x$ such that $V$ is singular at $x$. We already know from an earlier example that this point is $x=(0,0)$.  
+\end{example}

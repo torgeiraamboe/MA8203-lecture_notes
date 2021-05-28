@@ -1,0 +1,112 @@
+
+\section{Lecture 10 - 15.02.21}
+
+We continue studying sheaves. Let's recall the definition. A $\C$-valued presheaf on a topological space $X$ is a contravariant functor $\F\colon Open(X)\longrightarrow \C$. A sheaf $\F$ is a presheaf that satisfies the glueability axiom. 
+
+\begin{itemize}
+    \item If $U\subseteq X$ is an open set, covered by other open sets $\{U_i\}_{i\in I}$, then for any choice of sections $f_i\in \F(U_i)$ such that $f_{i\vert U_1\cap U_j} = f_{j\vert U_i\cap U_j}$, there exists a unique section $f\in U$ such that $f_{\vert U_1} = f_i$. 
+\end{itemize}
+
+Notice that this requires the category $\C$ to be concrete, i.e. have objects that consists of elements. If we have an abelian category instead, we can define the glueability axiom in an equivalent way without using elements. This equivalent axiom is given by the exacness of the following sequence:
+\begin{equation*}
+    0\longrightarrow \F(U)\overset{\phi}\longrightarrow \prod_{i\in I} \F(U_i)\overset{\alpha - \beta}\longrightarrow \prod_{i\in I} \F(U_i\cap U_j)
+\end{equation*}
+where $\alpha$ is the map given by projecting to $\F(U_i)$, then restricting to $\F(U_i\cap U_j)$ and including into the product. The map $\beta$ is given the same way, but by first projecting to $\F(U_j)$ instead. The uniqueness condition comes from exactness at the left part of the sequence, and the existence comes from the exactness in the middle.
+
+There is even an even more general axiom, that does not require $\C$ to be abelian. This axiom is given by the sequence
+\begin{equation*}
+    \F(U)\longrightarrow \prod_{i\in I} \F(U_i)\rightrightarrows \prod_{i\in I} \F(U_i\cap U_j)
+\end{equation*}
+being an equalizer sequence. 
+
+\begin{problem}
+Let $U=U_1\cup U_2$ and $\F$ a sheaf of abelian groups. Show that the definition using abelian categories and concrete categories are the same in this setting. 
+\begin{proof}
+The sequence in this setting becomes
+\begin{equation*}
+    \F(U)\longrightarrow \F(U_1)\times \F(U_2) \longrightarrow \F(U_1\cap U_2)
+\end{equation*}
+where $\alpha$ is the map $\F(U_1)\times \F(U_2)\overset{p_1}\longrightarrow \F(U_1)\overset{res_{U_1, U_1\cap U_2}}\longrightarrow \F(U_1\cap U_2)$, $\beta$ the map $\F(U_1)\times \F(U_2)\overset{p_2}\longrightarrow \F(U_2)\overset{res_{U_2, U_1\cap U_2}}\longrightarrow \F(U_1\cap U_2)$ and $\phi$ the map 
+
+If $(f_1, f_2)$ lies in the kernel of $\alpha - \beta$, this means that $f_{1\vert U_1\cap U_2} - f_{2\vert U_1\cap U_2}$, i.e. $f_{1\vert U_1\cap U_2} = f_{2\vert U_1\cap U_2}$. Since this is a complex there exists a section $f\in \F(U)$ that gets mapped to $(f_1, f_2)$ by $\phi$. Since $\phi$ is injective, this section is unique. This shows the two definitions are the same in this small setting.
+\end{proof}
+\end{problem}
+
+\subsection{Stalks and germs}
+
+We want to examine what a sheaf does really locally, i.e. on a single point. We most often won't have that a singleton is an open set in the topological space, so we have to kind of zoom in using open neighbourhoods of the point. This is done formally by using limits. 
+
+\begin{definition}
+Let $\F$ be a (pre)sheaf on a topological space $X$ and fix a point $p\in X$. The stalk of $\F$ at $p$ is defined as $\F_p = \lim_{p\in U}\F(U)$. 
+\end{definition}
+
+Alternatively we can define the stalk $\F_p$ by 
+\begin{equation*}
+    \F_p = \{ (U, f)\vert p\in U, f\in \F(U)\}/\sim
+\end{equation*}
+where $(U, f)\sim (V, g)$ is there exists an open set $W$, containing $p$, such that $f_{\vert W} = g_{\vert W}$. 
+
+The equivalence class $[U, f]$, which we denote $f_p$, is called the germ of $f\in \F(U)$ at $p$. 
+
+Here goes agricultural image
+
+\begin{example}
+Let $X$ be a topological space, and $\O:Open(X)\longrightarrow Ring$ the sheaf of continuous functions, i.e. $\F(U) = \{ f\colon U\longrightarrow \R \vert f \text{ continuous}\}$. We showed earlier that this is in fact a sheaf. Let $p\in X$ and define $\phi \O_p\longrightarrow \R$ by $\O(f_p)=f(p)\in \R$. 
+
+We have that $\phi$ is surjective, as every real number is hit by its corresponding constant function. We also have that the kernel, $\Ker\phi = \{ [U, f]\in \O_p \vert f(p)=0\}$ is an ideal in $\O_p$. 
+
+Notice that $\O_p / \Ker\phi \cong \R$, hence $\Ker\phi$ is maximal. Also, if $[U, f]\in \O_p \setminus \Ker\phi$, then $f(p)\neq 0$. Since $f$ is a continuous function, we know that there exists a neighbourhood $V$ around $p$ such that $f_{\vert V}\neq 0$. This means that $[U, f]$ is invertible in $\O_p$ and hence that $(\O_p, \Ker\phi)$ is a local ring! 
+
+This is the construction that justifies the name ``local''. 
+\end{example}
+
+\todo[inline]{Fill in details, show Op a ring etc}
+
+\begin{problem}
+Given a sheaf $\F$ on a topological space $X$ and some point $p\in X$. Is $\F_p$ a local ring?  
+\end{problem}
+
+It is always possible to consider a sheaf (of sets) as a sheaf of functions. We show this as follows. 
+
+Let $\F$ be a sheaf on $X$ and let $K=\coprod_{p\in X}\F_p$. Define $i_U\colon\F(U)\longrightarrow Map(U, K)$ by $f\mapsto[p\mapsto f_p]$. 
+
+\begin{problem}
+Show that $i_U$ is an injection and that it is compatible with restriction maps. 
+\end{problem}
+
+This means that any sheaf (of sets) can be considered as a sub sheaf of this above construction. 
+
+\begin{example}[Restriction sheaf]
+Let $\F$ be a sheaf on $X$ and $U\subseteq X$ be an open set. The restriction of $\F$ to $U$, defined by sending open sets $V\subseteq U$ to $\F_{\vert U}(V) = \F(V)$ is again a sheaf, called the restriction sheaf. 
+\end{example}
+\begin{problem}
+Show that this is in fact a sheaf.
+\end{problem}
+
+\begin{example}[The constant presheaf]
+Let $S$ be a set. The constant presheaf at $S$ is defined by $\underline{S}_{pre}(U) = S$ for all open sets $U\subseteq X$. This is not a sheaf in general as it fails the glueability axiom. 
+\end{example}
+
+\begin{example}[The constant sheaf]
+Let $S$ be a set. The constant sheaf at $S$ is given by 
+\begin{equation*}
+    \underline{S}(U) = \{ f:U\longrightarrow S\vert f \text{ locally constant}\}
+\end{equation*}
+Equivalently we can define it by letting $\F_p = S$ for every $p\in X$. 
+\end{example}
+
+\begin{example}[The pushforward sheaf]
+Let $\F$ be a presheaf on $X$ and let $\pi\colon X\longrightarrow Y$ be a continuous map. The pushforward presheaf of $\F$ along $\pi$ is defined by $\pi_*\F(V)=\F(\pi^{-1}(U))$ for open sets $V\subseteq Y$. 
+\end{example}
+
+\begin{problem}
+If $F$ is a sheaf, show that $\pi_*\F$ is again a sheaf. 
+\end{problem}
+
+\begin{example}[The skyscraper sheaf]
+Let $p\in X$ be a point and $S$ a set. We endow $\{p\}$ with the discrete topology and define $i_p\colon \{p\}\hookrightarrow X$ to be continuous. The skyscraper sheaf is defined as $(i_p)_*\underline{S}$. 
+\end{example}
+
+\begin{problem}
+What does this sheaf look like? Hint: Look at the stalks. 
+\end{problem}

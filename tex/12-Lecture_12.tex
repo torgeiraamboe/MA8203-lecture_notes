@@ -1,0 +1,153 @@
+
+\section{Lecture 12 - 22.02.21}
+
+As we began introducing last time we want to talk about the kernel, cokernel and image sheaves of morphisms of sheaves. We stated that these not necessarily were sheaves, so we needed a way to fix this, which is done by sheafifying the presheaves. 
+
+\subsection{Sheafification}
+
+\begin{proposition}
+Let $\F$ be a presheaf on a topological space $X$. There is a sheaf $\F^+$ on $X$, unique up to unique isomorphism, and a map $\Theta\colon\F\longrightarrow\F^+$, such that for any sheaf $\G$ with morphism $\F\longrightarrow\G$ we have a commutative diagram
+\begin{center}
+\begin{tikzcd}
+\F \arrow[d] \arrow[r, "\Theta"] & \F^+ \arrow[ld, "\exists!", dotted] \\
+\G                               &                                    
+\end{tikzcd}
+\end{center}
+\end{proposition}
+\begin{proof}
+For any open set $U\subseteq X$ we define 
+\begin{equation*}
+    \F^+(U) = \{ s:U\longrightarrow \bigcup_{p\in U}\F_p \,\vert\, \text{1. and 2. holds}\},
+\end{equation*}
+where 
+\begin{enumerate}
+    \item $\forall p$ we have $s(p)\in \F_p$
+    \item $\forall p$ there exists a neighborhood of $p$, $V\subseteq U$ and $t\in \F(V)$ such that $\forall q\in V$ we have $t_q=s(q)$
+\end{enumerate}
+Our claim is that $\F^+$ defined this way is a sheaf that satisfies the above proposition. 
+
+For $V\subseteq U$ we have that $\F(U)\longrightarrow \F(V)$ is the actual restruction maps, as we defined $\F^+$ using functions. This means that $\F^+$ is at least a presheaf. 
+
+Assume we have a set with an open cover, i.e. $U=\bigcup_{i} U_i$ and sections $s_i\in \F^+(U_i)$ such that $s_{i\vert U_i\cap U_j} = s_{j\vert U_i\cap U_j}$. We define $s\in \F^+(U)$ to be the map that sends $x\in U$ to $s_i(x)$ when $x\in U_i$. This gives the existence of a glued section. 
+
+Assume that we have two sections $s, s'\in \F^+(U)$ such that $s_{\vert U_i}=s_i = s'_{\vert U_i}$. Since $\{U_i\}$ is a cover we know that all $x\in U$ lie at least in one of the $U_i$'s. We assume $x\in U_i$. Then \begin{equation*}
+    s(x)=s_{\vert U_i}(x) = s_i(x)=s'_{\vert U_i}(x) = s'(x)
+\end{equation*}
+holds for all points $x\in U$, hence $s=s'$. This shows that the map $s$ we defined above is unique, and hence that $\F^+$ has unique gluing, and is thus a sheaf.  
+
+The map $\Theta$ is defined as follows. For every open set $U\subseteq X$ define $\Theta(U)$ as
+\begin{align*}
+    \F(U)&\longrightarrow \F^+(U) \\
+    s&\longmapsto [U\rightarrow \cup \F_p, x\mapsto s_x]
+\end{align*}
+\end{proof}
+\todo[inline]{Check that sheaves factor through theta}
+
+As mentioned last time we define $\F^+$ to be the sheafification of a presheaf $\F$.
+
+
+\begin{problem}
+Prove that for all $p\in X$ that $\F^+_p = \F_p$.
+\end{problem}
+This means that at the level of stalks, working with the sheafification is relatively easy.
+
+Let $\phi_\F\longrightarrow \G$ be a morphism of sheaves (of abelian groups). Recall that $\Ker\phi$, $\Ima_{pre}\phi$ and $\Cok_{pre}\phi$ are presheaves. The kernel sheaf $\Ker\phi$ is in fact also a sheaf. 
+
+\begin{definition}
+A subsheaf of a sheaf $\F$ on $X$ is a sheaf $\F'$ such that for all open sets $U\subseteq X$ we have that $\F'(U)$ is a subobject of $\F(U)$, and that the restriction maps in $\F'$ are induced by the ones in $\F$. 
+\end{definition}
+Note that this makes $\F'_p$ a subobject of $\F_p$. 
+
+\begin{definition}
+We say a morphism $\phi\colon\F\longrightarrow\G$ is injective if $\Ker\phi=0$. 
+\end{definition}
+Note that $\phi$ is injective if and only if $\phi(U)$ is injective for all open sets $U\subseteq X$. 
+
+\begin{definition}
+We define the image sheaf of a morphism $\phi\colon\F\rightarrow\G$ to be $\Ima\phi = \Ima_{pre}\phi^+$, i.e. the sheafification of the image presheaf. 
+\end{definition}
+Calling it the image is justified as we have an injective morphism $\Ima\phi\longrightarrow\G$. This map exists because of universal property of the sheafification
+\begin{center}
+\begin{tikzcd}
+\F \arrow[rr, "\phi"] \arrow[rd] &                                              & \G \\
+                                 & \Ima_{pre}\phi \arrow[ru, "\psi'"] \arrow[d] &    \\
+                                 & \Ima\phi \arrow[ruu, "\exists\psi"', dotted] &   
+\end{tikzcd}
+\end{center}
+It is injective because $\psi'(U)$ is injective for all $U$, hence $\psi'$ injective. This implies $\psi'_p\colon(\Ima_{pre}\phi)_p\longrightarrow \G_p$ is injective, which by the problem above, i.e. $(\Ima_{pre}\phi)p = \Ima\phi_p$, means that $\psi_p$ is injective as well. Being injective on all germs is sufficien to be injective as morphism of sheaves, hence $\psi$ is injective. 
+
+\begin{definition}
+We say a morphism $\phi\colon\F\longrightarrow\G$ is surjective if $\Ima\phi = \G$. 
+\end{definition}
+
+\begin{definition}
+Let $\F'$ be a subsheaf of a sheaf $\F$ on a topological space $X$. We define the quotient sheaf $\F/\F'$ by sending an open set $U\subseteq X$ to $\F(U)/\F'(U)$. 
+\end{definition}
+\begin{problem}
+Show that this is in fact a sheaf.
+\end{problem}
+
+\begin{definition}
+Let $\phi\colon\F\longrightarrow\G$ be a morphism of sheaves. We define its cokernel sheaf to be the sheaf $\Cok\phi = \Cok_{pre}\phi^+$, i.e. the sheafification of the cokernel presheaf. 
+\end{definition}
+
+\begin{definition}
+A sequence of sheaves on a topological space $X$,
+\begin{equation*}
+    \cdots \overset{\phi^{i-2}}\longrightarrow \F^{i-1}\overset{\phi^{i-1}}\longrightarrow \F^i\overset{\phi^i}\longrightarrow \F^{i+1}\overset{\phi^{i+1}}\longrightarrow\cdots
+\end{equation*}
+is called exact at degree $i$ if $\Ker\phi^{i} = \Im\phi^{i-1}$. The sequence is called exact if it is exact at all $i$. 
+\end{definition}
+
+Note that the sequence 
+\begin{equation*}
+    \cdots \overset{\phi^{i-2}}\longrightarrow \F^{i-1}\overset{\phi^{i-1}}\longrightarrow \F^i\overset{\phi^i}\longrightarrow \F^{i+1}\overset{\phi^{i+1}}\longrightarrow\cdots
+\end{equation*}
+is exact if and only if the sequence 
+\begin{equation*}
+    \cdots \overset{\phi^{i-2}(U)}\longrightarrow \F^{i-1}(U)\overset{\phi^{i-1}(U)}\longrightarrow \F^i(U)\overset{\phi^i(U)}\longrightarrow \F^{i+1}(U)\overset{\phi^{i+1}(U)}\longrightarrow\cdots
+\end{equation*}
+is exact for all open sets $U\subseteq X$.
+
+\begin{definition}
+Let $\F$ and $\G$ be sheaves on a topological space $X$. For an open set $U\subseteq X$ we define $\Hom(\F, \G)(U) = Mor(\F_{\vert U}, \G_{\vert U})$. 
+\end{definition}
+
+\begin{proposition}
+The assignment $\Hom(\F, \G)$ defines a sheaf on $X$. 
+\begin{proof}
+We first see that it is a presheaf. Take a subset $V\subseteq U$, we need to define a map $Mor(\F_{\vert U}, \G_{\vert U})\longrightarrow Mor(\F_{\vert V}, \G_{\vert V})$. For any subset $W\subseteq V$ we have that $\F_{\vert V}(W)=\F_{\vert U}(W)$, as the extra restriction of the sheaf itself does not do anything since we are looking at function on an even smaller set. Hence we get a map $\F_{\vert V}(W)\longrightarrow \G_{\vert V}(W)$ from the map we already have from $\F_{\vert U}(W)\longrightarrow \G_{\vert U}(W)$. 
+
+Let now $U=\bigcup U_i$ be an open cover and suppose $s_i\in \Hom(\F, \G)(U_i)$ such that $s_{i\vert U_i\cap U_j} = s_{j\vert U_i\cap U_j}$. For $V\subseteq U$ set $V_i=V\cap U_i$, which means that $V=\bigcup V_i$ is an open cover. 
+
+For $f\in \F(V)$ we can restrict it to $V_i$ to get $f_{\vert V_i}\in \F(V_i)$. We can map this to $\G(V_i)$ by using $s_i(V_i)$ to get some $g_i\in \G(V_i)$. Since $\G$ is a sheaf we can glue these $g_i$ to get an unique section $g\in \G(V)$. We then simply define $s\in \Hom(\F, \G)(U)$ by $s(V)(f)=g$.
+
+This defines $s\colon \F_{\vert U}\longrightarrow \G_{\vert U}$ such that $s_{\vert U_i}=s_i$, and thus we have existence of a glued section.
+
+For uniqueness we assume there exists $s, t\in \Hom(\F, \G)(U)$ such that $s_{\vert U_i}=t{\vert U_i}$. For $V\subseteq U$ we have a diagram
+
+\begin{center}
+\begin{tikzcd}
+\F_{\vert U}(V) \arrow[d] \arrow[r, "t(V)"', bend right] \arrow[r, "s(V)", bend left] & \G_{\vert U}(V) \arrow[d] \\
+\F(V_i) \arrow[r, "s(V_i)=t(V_i)"']                                                   & \F(V_i)                  
+\end{tikzcd}    
+\end{center}
+where the vertical arrows are restriction maps. Let $f\in \F(V)$. We want to compare $s(V)(f)$ and $t(V)(f)$. For all $i$ we have
+\begin{equation*}
+    s(V)(f)_{\vert V_i} = s(V_i)(f_{\vert V_i}) = t(v_i)(f_{\vert V_i})=t(V)(f)_{\vert V_i}
+\end{equation*}
+which by $\G$ being a sheaf means that $s(V)(f)=t(V)(f)$. So $s(V)$ and $t(V)$ are pointwise equal, i.e. the same map, hence $s(V)=t(V)$. This holds for all open sets $V$, hence also $s$ and $t$ are pointwise equal, making them again equal, i.e. $s=t$. Hence the gluing is unique and we are done.
+\end{proof}
+\end{proposition}
+
+\begin{definition}
+Let now $\F$ and $\G$ be two $\O_X$ modules. We can define their tensor product $\F\otimes_{\O_X}\G$ to be the sheaf associted to the presheaf $U\longrightarrow \F(U)\otimes_{\O_X(U)\G(U)}$. 
+\end{definition}
+
+
+
+\subsection{Sheaves and varieties}
+
+Let $V$ be an affine algebraic set. We want to study some special ringed spaces, $(V, \O_V)$, which will be the affine algebraic varieties. In more generality we will have algebraic varieties which will be ringed spaces $(X, \O_X)$ that are locally affine. If $V\subseteq \P^n(k)$ is projective we will get projective algebraic varieties, which will be examples of these more general algebraic varieties. 
+
+In even more generality, these will all be examples of schemes, which also are locally ringed spaces. 

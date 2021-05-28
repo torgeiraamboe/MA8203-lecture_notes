@@ -1,0 +1,90 @@
+\section{Lecture 4 - 25.01.21}
+
+\subsection{Applications of Hilbert's nullstellensatz}
+
+Last time we proved Hilbert's nullstellensatz, that tells us the precise duality between the algebra and the geometry. It states that $I(V(I))=\sqrt{I}$. Since we already have $V(I(V))=V$ for affine algebraic sets $V$ we now have the following correspondence when we restrict ourselves to only radical ideals, i.e. ideals such that $\sqrt{I}=I$. 
+
+\begin{proposition}
+The assignments $V(-)$ and $I(-)$ gives us a bijection between the affine algebraic sets in $k^n$ and the radical ideals in $k[X_1, \ldots, X_n]$. 
+\end{proposition}
+
+Moreover we get that 
+\begin{enumerate}
+    \item $V$ is irreducible if and only if $I(V)$ is prime.
+    \item $V$ is a point if and only if $I(V)$ is maximal.
+\end{enumerate} 
+The first point we have proven earlier, but lets prove the second one.
+\begin{proof}
+Assume $V=\{x\}$. We know that $I(V)$ is an ideal, and that it is contained in some maximal ideal $I(V')$. By the order reversing property of $V(-)$ we get $V(I(V'))\subset V(I(V))$. But, we knot that $V(I(V))=V$, hence $V'\subset V = \{x\}$, so either $V'$ is equal to $V$ or $V'$ is empty. But the latter cant be true by the weak nullstellensatz (\cref{thm:weak_nullstellensatz}). Hence $V'=V$ which means that $I(V)$ is maximal. 
+
+For the converse we assume that $I(V)$ is maximal. We know again by the weak nullstellensatz that $V$ is non-empty, so we can take $x\in V$. By the order reversing property of $I(-)$ we have that $I(V)\subset I(\{x\})$.. But $I(V)$ is assumed maximal, hence either $I(\{x\})=k[X_1, \ldots, X_n]$ or $I(\{x\})=I(V)$. But the former cant be true as the variety generating the whole polynomial ring is the empty set, which we know $\{x\}$ isn't. Hence $I(\{x\})=I(V)$ which means $V=\{x\}$ is a point. 
+\end{proof}
+
+\begin{proposition}
+Let $V\subset k^n$ be a affine algebraic set. Then $V$ is finite if and only if $\Gamma(V)$ is a finite dimensional $k$-vector space. 
+\end{proposition}
+\label{prop:finite_iff_fin-dim-vs}
+\begin{proof}
+Assume first that $V=\{u_1, \ldots, u_r \}$ is a finite set and consider the ring homomorphism 
+\begin{align*}
+    \phi\colon k[X_1, \ldots, X_n] &\longrightarrow k^r \\
+    F&\longmapsto (F(u_1), \ldots, F(u_r))
+\end{align*}
+Notice that the kernel of $\phi$ are the maps $F$ such that $(F(u_1), \ldots, F(u_r)) = (0,\ldots, 0)$, in other words they are the maps that vanish on all points in $V$. Hence $\Ker \phi = I(V)$. This means that we have $\Gamma(V) = k[X_1, \ldots, X_n]/\Ker\phi$, which by the first isomorphism theorem is isomorphic to $\Im\phi \subset k^r$, i.e. $\Gamma(V)\cong k^s$, where $s\leq r$. This shows that $\Gamma(V)$ is a finite dimensional vector space. 
+
+For the other direction we assume that $\Gamma(V)$ is a finite dimensional vector space. There exists $s\geq 1$ and $a_i\in k$ such that
+\begin{equation*}
+    P_j=a_s \bar{X_j}^s + a_{s-1}\bar{X_j}^{s-1}+\ldots + a_1\bar{X_j}+a_0 1 = 0
+\end{equation*}
+where $\bar{X_j}^i$ are linearly dependent over $k$. If $u=(x_1, \ldots, x_n) \in V$, then $P_j(u)=0$ for each $j$. These are polynomials in just one variable, hence only have a finite set of roots, meaning $V$ must be finite as it vanishes on them all. 
+\end{proof}
+
+\begin{problem}
+Find a $k$-basis for $\Gamma(V)=k[X, Y]/I(V)$ where $V=V(Y^2, Y-X^2+1)$. 
+\end{problem}
+\begin{solution}
+
+\end{solution}
+\todo[inline]{Enter solution}
+
+Let now $W\subset V$ both be affine algebraic sets. Then we have $I(V)\subset I(W)$. In $\Gamma(V)$ we have an ideal $I(W)/I(V)$ as $I(W)\subset k[X_1, \ldots, X_n]$. We denote this ideal by $I_V(W)$. Notice that the inclusion $I(V)\rightarrow I(W)$ induces a surjection $\Gamma(V)\rightarrow \Gamma(W)$ which has kernel $I_V(W)$. Hence we have by the first isomorphism theorem $\Gamma(V)/I_V(W) \cong \Gamma(W)$. 
+
+This fact generalizes the correspondence we had earlier as a consequence of the nullstellensatz.
+
+
+\begin{proposition}
+The assignments $V(-)$ and $I(-)$ gives us a bijection between the affine algebraic sets in $V$ and the radical ideals in $\Gamma(V)$. 
+\end{proposition}
+
+Similarly to last time we get that
+\begin{enumerate}
+    \item $W$ is irreducible if and only if $I_V(W)$ is prime in $\Gamma(V)$
+    \item $W$ is a point in $V$ if and only if $I_V(W)$ is maximal in $\Gamma(V)$
+    \item $W$ is an irreducible component of $V$ if and only if $I_V(W)$ is a minimal prime ideal of $\Gamma(V)$.
+\end{enumerate}
+
+\begin{corollary}
+The points in $V$ are in a one-to-one correspondence with the maximal ideals in $\Gamma(V)$.
+\end{corollary}
+
+\begin{problem}
+Find all the maximal ideals in $k[X, Y]/(XY)$. 
+\end{problem}
+\todo[inline]{Write down solution}
+
+\subsection{First steps towards Bezout's theorem}
+
+We want to show that even stating Bezout's theorem makes sense. By this we mean that the intersection points of two plane curves actually can be counted. Before we state this as a theorem precisely we prove a lemma we will need in the proof of the theorem. 
+
+\begin{lemma}
+Let $F, G\in K[X, Y]$ be two non-zero polynomials with no common factors. Then there exists a non-zero polynomial $d\in k[X]$ such that $d=AF+BG$ for some $A, B\in k[X, Y]$. In particular $d\in (F, G)$. 
+\end{lemma}
+\begin{proof}
+Let $k(X)$ denote the field of fractions of $k[X]$. As this is a field we have that adjoining a variable $Y$, i.e. $k(X)[Y]$ is a PID. This means that the ideal $(F, G)$ generated by $F$ and $G$ is actually generated by a single element, which we denote by $d$. Now, $d$ must divide both $F$ and $G$, hence $F=d\cdot \frac{f}{p(x)}$ and $G=d\cdot \frac{g}{q(x)}$. By multiplying with the denominators we get $p(x)F=df$ and $q(x)G = dg$ in $k[X, Y]$. Since our polynomial ring is over a field we are in a UFD, hence we have unique factorization. This means that $d$ divides $p(x)$ or $d$ divides $q(x)$, meaning $d\in k[X]$. 
+\end{proof}
+
+\begin{theorem}
+Let $F, G\in K[X, Y]$ be two non-zero polynomials with no common factors. Then $V(F)\cap V(G)$ is finite. 
+\end{theorem}
+
+We will prove the theorem next time. 

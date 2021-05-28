@@ -1,0 +1,134 @@
+
+\section{Lecture 13 - 23.02.21}
+
+Last time we ended on a little note explaining where we are headed today, i.e. looking at algebraic varieties. 
+
+
+\subsection{The structural sheaf}
+
+Let $V\subseteq k^n$ be an affine algebraic set and recall that we have a basis for its open sets by the distinguished open sets $D(f) = V\setminus V(f)$. 
+
+\begin{lemma}
+To define a sheaf on a topological space $X$, it is enough to define it on the basis elements for the topology on $X$. 
+\end{lemma}
+\begin{problem}
+Prove this lemma, at least for sheaves of functions.
+\end{problem}
+
+We define a sheaf, called the structural sheaf, or the structure sheaf, $\O_V$ on $V$ by $\O_V(D(f)) = \Gamma(V)_f$. 
+
+\begin{proposition}
+$\O_V$ in fact defines a sheaf on $V$.
+\end{proposition}
+
+\begin{proof}
+For $D(f)\subseteq D(g)$ we have $V(g)\subseteq V(f)$, hence by the nullstellensatz we have $f\in \sqrt{g}$. This means that we can find a $h$ and a natural number $n$ such that $f^n=gh$. We have 
+\begin{align*}
+    \Gamma(V)_g &\longrightarrow \Gamma(V)_f \\
+    \frac{u}{g^i}&\longmapsto \frac{uh^i}{g^i h^i} = \frac{uh^i}{f^{ni}}
+\end{align*}
+Thus $\O_V$ is a presheaf of rings on $V$. 
+
+Assume now $D(f)=\bigcup D(f_i)$ and $s_i\in \O_V(D(f_i)$ such that $s_i{i\vert D(f_i)\cap D(f_j)} = s_{j\vert D(f_i)\cap D(f_j)}$. For $\O_V$ to be a sheaf we need a unique section $s\in \O_V(D(f))$ that restricts to the $s_i$'s. 
+
+Lets first look at a special case where $V$ is an irreducible affine algebraic set. In this case recall that we have $I(V)$ a prime ideal. Assume also that $D(f)=D(f_1)\cup D(f_2)$. Then we have a sequence 
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & \O_V(D(f)) \arrow[r] & \O_V(D(f_1))\oplus \O_V(D(f_2)) \arrow[r] & \O_V(D(f_1 f_2))
+\end{tikzcd}    
+\end{center}
+where exactness at $\O_V(D(f_1))\oplus \O_V(D(f_2))$ yields existence of a section, and $\O_V(D(f))$ yields uniqueness. 
+
+This we get from the totalization of the following commutative square
+\begin{center}
+\begin{tikzcd}
+\Gamma(V)_f \arrow[r] \arrow[d] & \Gamma(V)_{f_1} \arrow[d] \\
+\Gamma(V)_{f_2} \arrow[r]       & \Gamma(V)_{f_1 f_2}      
+\end{tikzcd}    
+\end{center}
+
+Ok, back to the general case. Write $s_i=\frac{a'_i}{f_i^{n_i}}$. We can choose $n=max{n_i}$ to get $s_i = \frac{a_i}{f_i^n}$ instead. 
+
+We have that $s_{i\vert D(f_i)\cap D(f_j)}=s_{j\vert D(f_i)\cap D(f_j)}$ if and only if $\frac{a_i}{f_i^n} = \frac{a_j}{f_j^n}$ in $\Gamma(V)_{f_1 f_2}$, which again hold if and only if $f_i^N f_j^N(a_i f_j^n - a_j f_i^n)=0$ for some $N$. As $f$ vanishes on $V(f_1^{n+N}, \ldots, f_r^{n+N})$ we have by $k$ being algebraically closed that $f\in \sqrt{(f_1^{n+N}, \ldots, f_r^{n+N})}$. Hence there exists $m\geq 1$ and $b_j\in \Gamma(V)$ such that $f^m = \sum_{j=1}^r b_j f_j^{n+N}$. Set $a=\sum_{j=1}^r a_j b_j f_j^{N}$ and then $s=\frac{a}{f^m}$. We claim that this is our glued section. To confirm this we need to show that it restricts to the $s_i$'s, i.e. that $\frac{a}{f^m}=\frac{a_i}{f_i^n}$ in $\Gamma(V)_{f_i}$. We have 
+\begin{align*}
+    f^N_i(a_i f^m - af_i^n) 
+    &= f_i^Na_i f^m - af_i^{n+N} \\
+    &= f_i^N a_i \sum_{j=1}^r b_j f_j^{n+N} - af_i^{n+N} \\
+    &= \sum_{j=1}^r a_i b_j f_i^{N} f_j^{n+N} - af_i^{n+N} \\
+    &= \sum_{j=1}^r a_j b_b f_i^{n+N} f_j^{N} - af_i^{n+N} \\
+    &= a f_i{n+N} - a f_i^{n+N} \\
+    &= 0
+\end{align*}
+where the fourth equality comes from the previous equation $f_i^N f_j^N(a_i f_j^n - a_j f_i^n)=0$. Hence $s$ restricts to $s_i$ and we are done.
+
+\end{proof}
+
+
+\subsection{Algebraic varieties}
+
+\begin{definition}
+An affine algebraic variety is a ringed space isomorphic (as ringed spaces) to $(V, \O_V)$ for some affine algebraic set $V$, where $\O_V$ is defined as above.
+\end{definition}
+
+Such an isomorphism is a homeomorphism of the topological spaces, and an isomorphism of sheaves. 
+ 
+\begin{proposition}
+Let $V$ be an affine algebraic set and $f\in \Gamma(V)$. Then $(D(f), \O_{V\vert D(f)})$ is an affine algebraic variety. 
+\end{proposition}
+\begin{proof}
+Assume $V\subseteq k^n$ and let $F$ be a polynomial corresponding to $f$. Define $\phi\colon D(f)\longrightarrow k^{n+1}$ by sending 
+\begin{equation*}
+    (x_1, \ldots, x_n)\longmapsto (x_1, \ldots , x_n, \frac{1}{f(x_1, \ldots, x_n)})
+\end{equation*}
+\end{proof}
+\begin{problem}
+Check that $\Ima\phi = V(J)$, where $J=I(V)+(X_{n+1}F - 1)$, and that $\phi$ is a homeomorphism. 
+\end{problem}
+
+\begin{definition}
+An algebraic variety, often just called a variety, is a quasi-compact ringed space $(X, \O_X)$ such that for any $x\in X$ there is an open neighborhood $U\subseteq X$, containing $x$, such that $(U, \O_{X\vert U}$ is an affine algebraic variety. 
+
+\end{definition}
+ 
+This is what we mean when we say a general algebraic variety is locally affine. By quasi-compact we mean that any open cover has a finite subcover. It is the same as being compact minus the Hausdorff property. 
+
+\begin{proposition}
+Let $(X, \O_X)$ be an algebraic variety. Any open set $U\subseteq X$ is a finite union of affine open sets, i.e. sets $U_i$ such that $(U_i, \O_{X\vert U_i})$ is an affine algebraic variety.  
+\end{proposition}
+\begin{proof}
+Write $X=\bigcup_{i=1}^r U_i$, $U_i$ open affine. This decomposition exists as $X$ is quasi-compact and locally affine. Let $U\subseteq X$ be open and write $U=\bigcup_{i=1}^r U\cap U_i$. The $U\cap U_i$'s are affine open.
+\end{proof}
+\begin{problem}
+Fill in details.
+\end{problem}
+
+\begin{problem}
+Is every open subvariety of an affine algebraic variety again affine? 
+\end{problem}
+
+\begin{problem}
+Let $(X, \O_X)$ be an algebraic variety and let $x\in X$. Prove that $\O_{X, x}$ is a local ring with maximal ideal $M=\{ f\in \O_{X,x} \,\vert f(x)=0  \}$
+\end{problem}
+Hint: Define $\phi\colon\O_{X,x}\longrightarrow k$ by $\phi(U, f)=f(x)$. 
+
+\begin{proposition}
+Let $(X, \O_X)$ be an algebraic variety, $x\in X$ and $U\subseteq X$ be an open set containing $x$. Set $A=\O_X(U)$ and let $M$ be the maximal ideal that corresponds to $x$. Then $\O_{X,x}\cong A_m$. 
+\end{proposition}
+
+\subsection{Projective algebraic varieties}
+
+Let $V\subseteq \P^n(k)$ be a projective algebraic set. We need to define a sheaf, and as before we do so on the basis $D^+(f)$ where $f\in\Gamma_{homog}(V)$. 
+
+\begin{definition}
+Let $R$ be a graded ring and let $f\in R$ be a homogeneous element of degree $d$. Then $R_f$ is also graded, and $deg(\frac{g}{f^r}=deg(g) - r\cdot d$. Define $R_{(f)}$ to be the set of degree $0$ in $R_f$. 
+\end{definition}
+
+\begin{definition}
+Let $V$ be a projective algebraic set. Define $\O_V(D^+(f))=\Gamma_{homog}(V)_{(f)}$.
+\end{definition}
+
+This is in fact a sheaf on $V$. 
+
+\begin{proposition}
+Let $V$ be a projective algebraic set. Then $(V, \O_V)$ is an algebraic variety, called a projective algebraic variety. 
+\end{proposition}

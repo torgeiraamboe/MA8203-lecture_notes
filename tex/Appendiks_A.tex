@@ -1,0 +1,34 @@
+\section{Appendix A}
+%\addcontentsline{toc}{section}{Appendiks A}
+
+\subsection{Alternative proof of Hilbert's nullstellensatz}
+\label{A:pf:nullstellenzats}\index{Hilbert's nullstellensatz}
+
+First we show that if $B$ is a finitely generated $k$-algebra and $\mathfrak{b}$ be an ideal in $B$. Then we have
+\begin{equation*}
+    \sqrt{\mathfrak{b}} = \bigcap_{\mathfrak{b}\subseteq\mathfrak{m}}\mathfrak{m}.
+\end{equation*}
+where $\mathfrak{m}$ are the maximal ideals in $B$.
+
+First, we note that the projection $\pi:B\rightarrow B/\mathfrak{b}$ induces bijections between the sets
+\begin{itemize}
+    \item prime ideals in $B/\mathfrak{b}$ and prime ideals in $B$ that contain $\mathfrak{b}$,
+    \item maximal ideals in $B/\mathfrak{b}$ and maximal ideals in $B$ that contain $\mathfrak{b}$,
+    \item radical ideals in $B/\mathfrak{b}$ and radical ideals in $B$ that contain $\mathfrak{b}$.
+\end{itemize}
+Hence we only need to prove the statement for $\mathfrak{b}=(0)$, and since it is clear that $\sqrt{(0)}$ is contained in every maximal ideal because $\sqrt{(0)}$ consists of all nilpotent elements, we only need to show that every element not contained in $\sqrt{(0)}$ is not contained in some maximal ideal. 
+
+Let $f\in B$ be non-nilpotent, i.e. $f\in \sqrt{(0)}$. This implies that $$B_f\cong B[t]/(ft-1)$$ is a non-trivial $k$-algebra, hence it has a maximal ideal $\mathfrak{m}$. Consider the morphism $\phi: B \longrightarrow B_f$. This is a morphism of finitely generated $k$-algebras, and by Zariski's lemma, $k\subseteq B/\phi^{-1}(\mathfrak{m})\subseteq B_f/\mathfrak{m}$ is a finite extension, and hence $k\subseteq B/\phi^{-1}(\mathfrak{m})$ is an integral extension. Since $k$ is a field, it is a field itself. This gives us that the inverse image of a maximal ideal is again a maximal ideal, i.e. $\phi^{-1}(\mathfrak{m})$ is a maximal ideal of $B$. But this ideal can't contain $f$. Hence we have shown that every non-nilpotent element is not contained in all maximal ideals. 
+
+Now we use this to deduce the result of the nullstellensatz. 
+
+Let $a \in k^n$. First, note that $a \in Z(\mathfrak{a})$ if and only if $\mathfrak{a}\subseteq \mathfrak{m}_{a}$. Hence, the maximal ideals containing $\mathfrak{a}$ is just the maximal ideals $\mathfrak{m}_{a}$ such that $a \in V(\mathfrak{a})$. Above we showed that the radical of an ideal was equal to the intersection of all maximal ideals containing it, hence we have 
+\begin{equation*}
+    \sqrt{\mathfrak{a}} = \bigcap_{a \in V(\mathfrak{a})}\mathfrak{m}_{a}. 
+\end{equation*}
+For the final part, we have for $f\in k[t_1,\ldots,t_n]$ and $a\in k^n$ that $f(x) = 0$ if and only if $f \in \mathfrak{m}_{a}$. Hence we have for subsets $V\subseteq k^n$ that $I(V) = \bigcap_{a \in V}\mathfrak{m}_{a}$. And since $a \in Z(\mathfrak{a})$ if and only if $\mathfrak{a}\subseteq \mathfrak{m}_{a}$, we finally have
+
+\begin{align*}
+    I(V(\mathfrak{a})) 
+    &= \bigcap_{a \in V(\mathfrak{a})}\mathfrak{m}_{a} = \sqrt{\mathfrak{a}}.
+\end{align*}

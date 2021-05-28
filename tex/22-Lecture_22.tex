@@ -1,0 +1,258 @@
+
+
+
+
+
+\section{Lecture 22 - 13.04.21}
+
+\subsection{Bézout's theorem}
+
+Last time we defined the intersection multiplicity of curves in $\P^2(k)$. This was the last thing we needed to define before proving Bézout's theorem, but there is still a couple small things to check before we do that.
+
+For the rest of the lecture we let
+\begin{itemize}
+    \item $k$ be an algebraically closed field
+    \item $F, G\in k[X, Y, T]$ be non-zero with no common components
+    \item $\deg F=s$ and $\deg G=t$. 
+\end{itemize}
+
+\begin{lemma}
+The projective intersection multiplicity does not depend on the choice of line at $\infty$. In fact
+\begin{equation*}
+    \O_{\P^2}(P)/(F, G)_P \cong \O_{k^2}(P)/(F_b, G_b)
+\end{equation*}
+which requires no such choice of $\infty$. 
+\end{lemma}
+\begin{proof}
+The morphism $(-)_b\colon k[X, Y, T]\longrightarrow k[X, Y]$ induced an morphism
+\begin{equation*}
+    (-)_b\colon k[X, Y, T]_{I(P)}\longrightarrow k[X, Y]_{m_p},
+\end{equation*}
+which restricts to an isomorphism 
+\begin{equation*}
+    (-)_b\colon\O_{\P^2}(P)\longrightarrow k[X, Y]_{m_p}.
+\end{equation*}
+\end{proof}
+
+\todo[inline]{Details}
+
+We need some more facts about the $(-)_b$ and $(-)^\#$ operations. 
+
+\begin{lemma}
+\begin{enumerate}
+    \item $(pq)^\# = p^\# q^\#$ 
+    \item $(p^\#)_b = p$ 
+    \item If $p$ is homogeneous, then $p=T^r(P_b)^\#$
+    \item If $p$ is homogeneous and $p_b = 0$, then $p=0$.  
+\end{enumerate}
+\end{lemma}
+\begin{problem}
+Prove the above statements.
+\end{problem}
+\todo[inline]{proof}
+
+\begin{theorem}[Bézout's theorem]
+Let $F, G\in k[X, Y, T]$ be non-zero, homogeneous of respective degree $s$ and $t$ such that they have no common components. Then 
+\begin{equation*}
+    \sum_{P\in V(F, G)}\mu_P(F, G) = s\cdot t
+\end{equation*}.
+\end{theorem}
+
+We will proove the theorem using a sequence of lemmas and smaller results. 
+
+In order for Bézout's theorem to work we need to know that the intersection of to curves give only a finite number of points. We had this for affine curves, but we have not yet proved it for projective ones. 
+
+\begin{lemma}
+$V(F)\cap V(G)$ is finite. 
+\end{lemma}
+\begin{proof}
+Take $T=0$ to be the line at $\infty$ and denote it by $D_\infty$. 
+
+We start by looking at the points at infinity. 
+
+There are two possibilities; $V(F)\cap D_\infty$ and $V(G)\cap D_\infty$ are either finite, or equal to $D_\infty$. If $V(F)\cap D_\infty = D_\infty$, then $I$ divides $F$. Similarly, if $V(G)\cap D_\infty = D_\infty$, then $I$ divides $G$. We know that $F$ and $G$ have no common components, so both of these cant be true at the same time. Hence at least one of them is finite, which means that $V(F)\cap V(G)\cap D_\infty$ is finite. 
+
+For the affine points we identify $\P^2\setminus D_\infty$ with $k^2$ as usual. It can be checked that $V(F)\cap k^2 = V(F_b)$, and similarly $V(G)\cap k^2 = V(G_b)$. By point 1) in the previous lemma we know that $F_b$ and $G_b$ still have no common components. Thus 
+\begin{equation*}
+    V(F)\cap V(G) \cap k^2 = V(F_b)\cap V(G_b)
+\end{equation*}
+is finite.
+
+Putting these two together we get that $V(F)\cap V(G)$ is finite. 
+\end{proof}
+
+\begin{lemma}
+There exists a line $D$ which misses $V(F)\cap V(G)$. 
+\end{lemma}
+\begin{proof}
+Let $Z\subseteq \P^2(k)$ be finite and take some point $a\in \P^2$. There a infinitely many lines passing through $a$, but only finitely many of them meet $Z$. 
+
+Hence for $Z=V(F)\cap V(G)$ we can choose one of these lines not meeting it. 
+\end{proof}
+
+
+Let $D$ be a projective line not meeting $Z$. Up to homography we know that $D=V(T)$. We also know that 
+\begin{equation*}
+    \sum_{P\in\P^2}\mu_P(F, G) = \sum_{P\in V(F_b, G_b)} \mu_P(F_b, G_b) = \dim_k \O_Z (Z)
+\end{equation*}
+where $(Z, \O_Z)$ is the finite scheme on the intersection of $V(F)$ and $V(G)$.
+
+To prove Bézout's theorem it is enough to show that 
+\begin{equation*}
+    \dim \O_Z(Z) = \sim_k k[X, Y]/(F_b, G_b) = s\cdot t
+\end{equation*}
+
+Note that this is absolutely not the same as just reducing to affine space, as we really need the whole system to be induced from projective space in the right way!
+
+Set 
+\begin{itemize}
+    \item $S = k[X, Y, T]$
+    \item $R = k[X, Y]$
+    \item $J = (F,G)$
+    \item $I = (F_b, G_b)$
+    \item $i\colon Z\hookrightarrow k^2$
+    \item $j\colon Z\hookrightarrow \P^2$. 
+\end{itemize}
+
+\begin{proposition}
+We have that $i_*\O_Z\cong \widetilde{R/I}$ and $j_*\O_Z \cong \widetilde{S/J}$. 
+\end{proposition}
+
+In particular we have $\Gamma(Z, \O_Z)=\Gamma(\P^2, \widetilde{S/J})$. This is sort of similar to one of the isomorphism theorems from abstract algebra. 
+
+It Bézout's theorem it is then enough to show that
+\begin{equation*}
+    \dim_k \Gamma(\P^2, \widetilde{S/J}) = s\cdot t
+\end{equation*}
+
+\begin{lemma}
+There is an exact sequence of graded $S$-modules 
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & {S[-s-t]} \arrow[r, "\begin{bmatrix} -G \\ F \end{bmatrix}"] & {S[-s]\oplus S[-t]} \arrow[r, "\begin{bmatrix} F \,\,\, G \end{bmatrix}"] & S \arrow[r, "\pi"] & S/J \arrow[r] & 0
+\end{tikzcd}        
+\end{center}
+\end{lemma}
+
+\begin{problem}
+Check this. 
+\end{problem}
+The above complex is in fact a Koszul complex. 
+
+There is another exact sequence of sheaves
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & {\O_{\P^2}[-s-t]} \arrow[r] & {\O_{\P^2}[-s]\oplus \O_{\P^2}[-t]} \arrow[r] & \O_{\P^2} \arrow[r] & \widetilde{S/J} \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+
+This there is also an exact sequence of rings 
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & {\Gamma(\P^2, \widetilde{J})} \arrow[r] & {\Gamma(\P^2, \O_{\P^2})} \arrow[r] & {\Gamma(\P^2, \widetilde{S/J})}
+\end{tikzcd}
+\end{center}
+in which the rightmost map is not surjective. We can see this clearly as the middle ring has dimension 1, but we hope that the rightmost ring has dimension $s\cdot t$. The failure of this to be right exact is given by sheaf cohomology, which we will get back to. 
+
+The solutiion is then to work with the shifted sheaves instead, $\O_{\P^2} = \widetilde{S(d)}$. 
+
+Recall that 
+\begin{equation*}
+\Gamma(\P^2, \O_{\P^2}(d)) = 
+    \begin{cases}
+        0, \quad d<0 \\
+        S_d, \quad d\geq 0
+    \end{cases}.
+\end{equation*}
+
+Hence we need to compare $\O_Z=\widetilde{S/J}$ with $\widetilde{S/J(d)}=\O_Z(d)$. The goal is to show that these are isomorphic. 
+
+\begin{proposition}
+\begin{equation*}
+    \alpha\colon S/J(-1)\overset{\cdot T}\longrightarrow S/J
+\end{equation*}
+is an injection, and for $n\geq s+t-1$, 
+\begin{equation*}
+    \alpha_n\colon (S/J)_{n-1}\longrightarrow (S/J)_n
+\end{equation*}
+is a surjection. 
+\end{proposition}
+\begin{proof}
+We will leave out the proof for injectivity, but it can be read in Perrin. Surjectivity will follow from the next lemma. 
+\end{proof}
+
+\begin{lemma}
+For $d\geq s+t-2$ we have $\dim_k(S/J)_d = s\cdot 2$. 
+\end{lemma}
+\begin{proof}
+Look at the exact sequence earlier in degree $d$. 
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & {S[-s-t]} \arrow[r, "\begin{bmatrix} -G \\ F \end{bmatrix}"] & {S[-s]\oplus S[-t]} \arrow[r, "\begin{bmatrix} F \,\,\, G \end{bmatrix}"] & S \arrow[r, "\pi"] & S/J \arrow[r] & 0
+\end{tikzcd}        
+\end{center}
+We then have the result by recalling that for an exact sequence
+\begin{equation*}
+    0\longrightarrow A\longrightarrow B\longrightarrow C\longrightarrow 0
+\end{equation*}
+we have $\dim B = \dim A+\dim C$. 
+\end{proof}
+
+\begin{example}
+Let $F=X^2-Y$ and $G=Y$ and $d=2$. In $k[X, Y, T]$ we have six generators in degree $d=2$, namely $X^2, Y^2, T^2, XY, XT, YT$. In $k[X, Y, T]/(YT-X^2, Y)$ all of these except $T^2$ and $XT$ vanish. Hence it has dimension $2 = \deg F \cdots \deg G = 2\cdots 1$. 
+\end{example}
+
+\begin{corollary}
+\begin{equation*}
+    \widetilde{S/J}(-1) \cong \widetilde{S/J} \implies \O_Z \cong \O_Z(d)
+\end{equation*}
+for any $d\in \Z$. 
+\end{corollary}
+
+Now, we then need to show that
+\begin{equation*}
+    s\cdot t = \dim_k\Gamma(\P^2, \widetilde{S/J}) = \dim_k\Gamma(\P^2, \widetilde{S/J(d)}
+\end{equation*}
+
+Thus it is enough to show that there exists an isomorphism 
+\begin{equation*}
+    (S/J)_d \longrightarrow k[X, Y]/(F_b, G_b)
+\end{equation*}
+
+as we know that $(S/J)_d$ has dimension $s\cdot t$. 
+
+Consider the ring homomorphism $(-)_b\colon k[X, Y, T]\longrightarrow k[X, Y]$. It induces a homomorphism $(-)_b\colon S/J\longrightarrow R/I$ which restricts to a morphism 
+\begin{equation*}
+    (-)_b\colon (S/J)_d \longrightarrow R/I
+\end{equation*}
+which is an isomorphism for $d\geq s+t-2$. 
+% 
+This all together proves Bézout's theorem!
+
+\begin{example}
+Let $V(F)$ be the trefoil curve, and $V(G)$ the quadrafoil curve. They have degree $4$ and $6$ respectively. From Bézout's theorem we know that these have $24$ intersection points. 
+\end{example}
+
+\begin{problem}
+It would be interesting to have a full write up of this problem with a complete solution. 
+\end{problem}
+
+\begin{example}
+Let $F=X^2-Y$ and $G=X^3-Y$. Let the line at infinity be given by $T=0$. We then get $k[X, Y]/(Y-X^2, Y_X^3)$ as our ring. If we localize at $(0,0)$ it is the same as localizing at the ideal $(X, Y)$ and we get 
+\begin{equation*}
+    \frac{k[X, Y]_{(X, Y)}}{(Y-X^2, Y-X^3)}\cong \frac{k[X]_{(X)}}{(X^3-X^2)} = \frac{k[X]_{(X)}}{(X^2(X-1))} \cong \frac{k[X]}{(X^2)}
+\end{equation*}
+as $(X-1)$ becomes a unit. This algebra has dimension 2, hence the point $(0,0)$ has multiplicity $2$. 
+
+Localizing at $(1,1)$ gives
+\begin{equation*}
+    k[X]_{(X-1)}/(X^2(X-1))\cong k[X]/(X-1)\cong k
+\end{equation*}
+This shows that the point $(1,1)$ has multiplicity 1. 
+
+We really should have 6 points here, which means they intersect at infinity in multiplicity 3. This means that the choice of line at infinity to be $T=0$ was a bad choice...
+\end{example}
+
+\begin{problem}
+Try the above example choosing $0=X-Y-T$ as the line at infinity. We should then get three affine points with total multiplicity 6. 
+\end{problem}

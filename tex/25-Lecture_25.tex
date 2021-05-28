@@ -1,0 +1,211 @@
+
+\section{Lecture 25 - 26.04.21}
+
+Last lecture we created a cocomple $\cC(X,\F)$ called the \Cech complex of a topological space $X$. Its homology coincided with the derived global sections. 
+
+\begin{lemma}
+If $V\subseteq \P^N$ is an $n$-dimensional projective variety, then there exists a linear subvariety $W\subseteq \P^N$ of codimension $n+1$ such that $V\cap W = \emptyset$.
+\end{lemma}
+The proof can be read in Perrin. 
+
+\begin{theorem}
+Let $V$ be an $n$-dimensional separated algebraic variety and $\F$ a quasi-coherent sheaf on $V$. Then 
+\begin{equation*}
+    \cH^i(V,\F) = 0
+\end{equation*}
+for all $i>n$. 
+\end{theorem}
+We prove this in the case of $V$ being a projective variety in $\P^N$.
+\begin{proof}
+We know from the above lemma that thee exists s linear subvariety $W$. Up to homography we can assume that $W = V(X_0, \ldots, X_n)$. As $W\cap V$ is empty we have that $V\subseteq D^+(X_0)\cup \cdots D^+(X_n)$, which gives an open affine covering $\{ V\cap D^+(X_i)\}$ of $V$. The \Cech complex for this covering looks like
+\begin{equation*}
+    C^0\longrightarrow \cdots \longrightarrow C^n \longrightarrow 0
+\end{equation*}
+which automatically makes $H^i(V,\F) = 0$ for all $i>n$. 
+\end{proof}
+
+\begin{theorem}
+Let $X$ be a projective algebraic variety and $\F$ a quasi-coherent sheaf on $X$. Then $\dim_k \cH^i(X,\F)<\infty$ for all $i\geq 0$. Furthermore, there is an integer $n_0$, dependent on $\F$, such that for all $d\geq n_0$ and $i>0$ we have $\cH(X,\F(d))=0$. 
+\end{theorem}
+
+\subsection{Riemann-Roch theorem}
+
+Let $\F$ be a coherent sheaf on a projective algebraic variety $X$. We know that $\dim_k \cH^i(X,\F) < \infty$, so every such number is an actual integer. These turn out to be highly interesting. 
+
+\begin{definition}
+Let $X$ be a projective algebraic variety and $\F$ a coherent sheaf on $X$. Then we define the Euler-Poincaré characteristic of $X$ with respect to $\F$ by 
+\begin{equation*}
+    \chi(X,\F) = \sum_{i=0}^n (-1)^i \dim_k \cH^i(X,\F)
+\end{equation*}
+\end{definition}
+
+This should remind us of Eulers formula for polyhedra, which is given as follows. Consider a convex 3-dimensional polyhedra with $V$ vertices, $E$ edges and $F$ faces. Then $V-E+F = 2$. 
+
+\begin{example}
+Let $P$ be the cube, i.e. the following convex polyhedra:
+\begin{center}
+\def\svgwidth{0.4\textwidth}
+\input{inkscape/cube.pdf_tex}
+\end{center}
+It has 8 vertices, 12, edges and 6 faces, meaning that $V-E+F = 8-12+6 = 2$.  
+\end{example}
+
+
+\begin{lemma}
+Let 
+\begin{equation*}
+    0\longrightarrow A_n \longrightarrow A_n-1 \longrightarrow \cdots \longrightarrow A_1 \longrightarrow A_0 \longrightarrow 0
+\end{equation*}
+be an exact sequence of finite dimensional vector spaces. Then 
+\begin{equation*}
+    \sum_{i=0}^n (-1)^i \dim_k A_i = 0
+\end{equation*}
+\end{lemma}
+\begin{proof}
+For $n=1$ the statement is true because $A_1\cong A_2$ which means they have the same dimension. For $n = 2$ we have the exact sequence 
+\begin{equation*}
+    0\longrightarrow A_2\longrightarrow A_1 \longrightarrow A_0\longrightarrow 0 
+\end{equation*}
+which by the Rank-nullity theorem gives us $\dim A_1 = \dim A_2 + \dim A_0$, which means the formula holds.  
+
+Take now the full sequence 
+\begin{equation*}
+    0\longrightarrow A_n \longrightarrow A_n-1 \longrightarrow \cdots \longrightarrow A_1 \longrightarrow A_0 \longrightarrow 0
+\end{equation*}
+and notice that for any three objects in the sequence we have a diagram
+\begin{center}
+\begin{tikzcd}
+                 & 0                                      & 0 \arrow[d]                         & 0                           &        \\
+                 & \Ima d^{i-1} \arrow[u] \arrow[r, "="]  & \Ker d^{i} \arrow[d]                & \Ima d^{i+1} \arrow[u]      &        \\
+\cdots \arrow[r] & A_{i-1} \arrow[u] \arrow[r, "d^{i-1}"] & A_i \arrow[d] \arrow[r, "d^{i}"]    & A_{i+1} \arrow[u] \arrow[r] & \cdots \\
+                 & \Ker d^{i-1} \arrow[u]                 & \Ima d^{i} \arrow[d] \arrow[r, "="] & \Ker d^{i+1} \arrow[u]      &        \\
+                 & 0 \arrow[u]                            & 0                                   & 0 \arrow[u]                 &       
+\end{tikzcd}  
+\end{center}
+where the columns are exact. By the $n=2$ case we know that $\dim A_i = \dim \Ker d^i + \dim \Ima d^i$ for all $i$. Since the original sequence is exact we know that $\Ker d^i = \Ima d^{i-1}$, which together with the fact that $\Ker d^n = 0$ and $\Ima d^0 = 0$ allows us to construct the following sum:
+
+\begin{align*}
+    \dim A_0 
+    &= \dim\Ker d^0 \\
+    &= \dim\Ima d^1 \\
+    &= \dim A_1 - \dim\Ker d^1 \\
+    &= \dim A_1 - \dim\Ima d^1 \\
+    &= \dim A_1 - \dim A_2 + \dim\Ker d^2 \\
+    &\hspace{2cm}\vdots \\
+    &= -\sum_{i=1}^{n-1}(-1)^i \dim A_i + (-1)^{n}\dim\Ker d^{n-1} \\
+    &= -\sum_{i=1}^{n-1}(-1)^i \dim A_i + (-1)^n\dim\Ima d^n \\
+    &= -\sum_{i=1}^{n-1}(-1)^i \dim A_i + (-1)^n\dim A_n + (-1)^n\dim\Ker d^n  \\
+    &= -\sum_{i=1}^{n-1}(-1)^i \dim A_i + (-1)^n\dim A_n \\
+\end{align*}
+Moving the sum to the left hand side we get finally
+\begin{equation*}
+    \sum_{i=0}^{n}(-1)^i \dim A_i = 0
+\end{equation*}
+which concludes the proof.
+\end{proof}
+
+
+\begin{proposition}
+Let
+\begin{equation*}
+    0 \longrightarrow \F' \longrightarrow \F \longrightarrow \F'' \longrightarrow 0
+\end{equation*}
+be an exact sequence of coherent sheaves on an $n$-dimensional projective algebraic variety $X$. Then 
+\begin{equation*}
+    \chi(X,\F) = \chi(X,\F')+\chi(X,\F'')
+\end{equation*}
+\end{proposition}
+\begin{proof}
+As the sequence is exact we get a long exact sequence in \Cech cohomology
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & {\cH^0(X,\F')} \arrow[r] & {\cH^0(X,\F)} \arrow[r] & {\cH^0(X,\F'')} \arrow[lld] &   \\
+            & {\cH^1(X,\F')} \arrow[r] & {\cH^1(X,\F)} \arrow[r] & {\cH^1(X,\F'')} \arrow[lld] &   \\
+            & {\cH^2(X,\F')} \arrow[r] & \cdots \arrow[r]        & {\cH^n(X,\F'')} \arrow[r]   & 0
+\end{tikzcd}    
+\end{center}
+where we know it ends at $n$ because of the earlier results. This is a long exact sequence of vector spaces, meaning that we can apply the previous lemma. We then get
+\begin{align*}
+    0&=\sum_{i=0}^{n}(-1)^{i}(\dim\cH^i(X,\F')-\dim\cH^i(X,\F)+\dim\cH^i(X,\F'')) \\
+    &= \sum_{i=0}^{n}(-1)^{i}\dim\cH^i(X,\F') - \sum_{i=0}^{n}(-1)^{i}\dim\cH^i(X,\F) + \sum_{i=0}^{n}(-1)^{i}\dim\cH^i(X,\F'') \\
+    &= \chi(X,\F')-\chi(X,\F) + \chi(X,\F'').
+\end{align*}
+Rearranging we get the result we wanted:
+\begin{equation*}
+    \chi(X,\F) = \chi(X,\F')+ \chi(X,\F'').
+\end{equation*}
+\end{proof}
+
+Let now $C\subseteq \P^N$ be an irreducible projective curve and denote 
+\begin{itemize}
+    \item $S = k[X_0, \ldots, X_n]$
+    \item $A = \Gh(C) = S/I(C)$, which is a graded domain
+    \item $\widetilde{A} = \O_C$
+    \item $n \in \Z$
+\end{itemize}
+
+Our goal is to calculate $\chi(\O_C(n)$. Notice that 
+$$ \chi(\O_C(n)) = \dim_k\cH^0(X,\O_C(n))-\dim_k \cH^1(X, \O_C(n))$$ as the curve $C$ is of dimension 1. 
+
+Idea: Look at the intersection of $C$ with a general enough hypersurface. 
+
+\begin{proposition}
+Let $H=V(h)$ be a hypersurface not containing $C$. Then multiplication by $\overline{h}\in A = S/I(C)$ induces an exact sequence 
+$$ 0\longrightarrow A(-1)\overset{\cdot \overline{h}}\longrightarrow A \longrightarrow A/(\overline{h}) \longrightarrow 0 $$
+\end{proposition}
+\begin{proof}
+It is enough to show that $\cdot \overline{h}$ is an injection as the last map is a surjection by definition. As $A$ is a domain it is enough to show that $\overline{h}\neq 0$, or equivalently, $\overline{h}\notin I(C)$. 
+
+Note that if we would have $h\in I(C)$, then $V(h)\supseteq V(I(C)) \supseteq C$, and we have $V(h)=H$ which is assumed to not contain $C$ which is a contradiction. Hence $h\notin I(C)$. 
+\end{proof}
+
+Let now $Z = C\cap H$, and notice that it is finite, as $H\supsetneq C$. We endow $Z$ with a finite scheme structure by letting $\O_Z$ be the sheaf associated to $A/(\overline{h})$. 
+
+The exact sequence we got above by multiplying with $\overline{h}$ gives us an exact sequence 
+$$ 0\longrightarrow \O_C(-1)\longrightarrow \O_C \longrightarrow \O_Z \longrightarrow 0,  $$ which we can shift by $n$ to get an exact sequence 
+$$ 0\longrightarrow \O_C(n-1)\longrightarrow \O_C(n) \longrightarrow \O_Z(n) \longrightarrow 0 $$
+
+By the earlier proposition we know that if we take the Euler-Poincaré characteristics, we get 
+$$ \chi(C, \O_C(n)) = \chi(C, \O_C(n-1) + \chi(Z, \O_Z(n)). $$
+
+We have $\dim\cH^0(Z,\O_Z(n)) = \dim\cH^0(Z, \O_Z) = d$, as $\O_Z(n)\cong \O_Z$. As $Z\neq \emptyset$ we know that $d\geq 1$. 
+This integer $d$ is the number of intersection points, counted with multiplicity, between $C$ and $H$. 
+
+We get 
+\begin{align*}
+    \chi(\O_C(n))
+    &= d + \chi(\O_C(n-1)) \\
+    &= 2d + \chi(\O_C(n-2)) \\
+    &\hspace{2cm}\vdots \\
+    &= nd + \chi(\O_C)
+\end{align*}
+
+The part $nd + \chi(\O_C)$ can be though of as a polynomial of degree $n$ in the variable $n$, and it shows up sometimes in dimension theory. 
+
+Note that the above calculation shows that the number $d$ does not depend on the hyperplane $H$. 
+
+\begin{definition}[The dregree of a curve]
+The number $d$ is called the degree of $C$. 
+\end{definition}
+
+\begin{lemma}
+Let $X$ be an irreducible projective algebraic variety. Then $\cH^0(X,\O_X)\cong k$. 
+\end{lemma}
+\begin{proof}
+We have that $\cH^0(X, \O_X) \cong \Gamma(X, \O_X)$ is a domain, that is finite dimensional over $k$. It is in fact a field, and is algebraic over $k$, which means it is isomorphic to $k$ as $k$ is algebraically closed. 
+\end{proof}
+
+\begin{definition}[The genus of a curve]
+We call the integer $g = \dim \cH(C, \O_C)$ the genus of $C$. 
+\end{definition}
+
+We have during this subsection actually proven the following result. 
+
+\begin{theorem}[The Riemann-Rock theorem]
+Let $C$ be an irreducible projective algebraic curve of degree $d$ and genus $g$. Then for all $n\in \Z$ we have 
+$$\chi(\O_C(n)) = nd + 1-g$$. 
+\end{theorem}
+
+\begin{example}
+Let $F\in k[X, Y, T]$ be irreducible, homogeneous and of polynomial degree $d>0$. Let $C = \Vp(F) \subseteq \P^2$. Then the degree of $C$ is $d$, and the genus of $C$ is $\frac{(d-1)(d-2)}{2}$.  
+\end{example}

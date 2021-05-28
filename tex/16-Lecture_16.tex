@@ -1,0 +1,111 @@
+
+\section{Lecture 16 - 08.03.21}
+
+\subsection{Dimension}
+
+Since we are working both with algebra and topology we have two separate notions of dimension, one algebraic and one topological. 
+
+\begin{definition}
+Let $X$ be a topological space. The dimension of $X$ is defined to be
+\begin{equation*}
+    \dim X = \sup_{n\in \Z}\{ X_0\subsetneq X_1\subsetneq \cdots \subsetneq X_n\}
+\end{equation*}
+where $X_i$ is a closed irreducible subset of $X$. 
+\end{definition}
+
+Note that this definition is really only useful when working with topologies similar or equal to the Zariski topology. In most standard topologies there is usually not very many such sets, so the dimension is often just zero or one. 
+
+\begin{proposition}
+Let $Y\subseteq X$ be a subspace. Then $\dim X \geq \dim Y$. If $X$ is irreducible and finite dimensional, and $Y$ is closed in $X$, then $\dim X > \dim Y$. 
+\end{proposition}
+\begin{proof}
+Let $F_0\subsetneq \cdots \subsetneq F_n$ be a chain of closed irreducible subsets of $Y$, then $\overline{F_0} \subseteq \cdots \subseteq \overline{F_n}$ is a chain of closed subsets of $X$. As we have $F_i=\overline{F_i}\cap Y$ we must have that the $\overline{F_i}$'s are distinct, because if $\overline{F_i}=\overline{F_{i+1}}$ then $F_i=F_{i+1}$, which we have assumed is not so. Hence we have a chain $\overline{F_0}\subsetneq \cdots \subsetneq \overline{F_n}$. Suppose that $\overline{F_i}=U\cup V$, where $U, V$ closed and non-empty. Then $F_i=\overline{F_i}\cap Y = (U\cap Y)\cup (V\cap Y)$, which contradicts the assumption that $F_i$ is irreducible. Hence $\overline{F_i}$ is irreducible, and we have at least a chain of length $n$ in $X$ for all chains of length $n$ in $Y$, hence $\dim Y\leq \dim X$. 
+
+Now, assume that $X$ is irreducible, $\dim X<\infty$ and $Y$ closed in $X$. By the above argument we also have $\dim Y< \infty$, so let $\dim Y=n$. Then a maximal length chain in $Y$ looks like $F_0\subsetneq \cdots \subsetneq F_n$ for some closed irreducible subsets $F_i$. Then we have that $\overline{F_0}\subsetneq \cdots \subsetneq \overline{F_n}\subsetneq X$ is a chain in $X$ of length $n+1$, meaning $\dim Y < \dim X$.
+\end{proof}
+
+\begin{proposition}
+If $X=\bigcup_{i=1}^n X_i$ where $X_i$ is closed in $X$, then we have $\dim X = \sup\dim X_i$.
+\end{proposition}
+\begin{proof}
+We know from the previous proposition that $\dim X \geq \dim X_i$ for all $i$, hence we also have $\sim X\geq \sup\dim X_i$. Notice that we are done if $\sup\dim X_i = \infty$, hence we assume $\sup\dim X_i = p$. Suppose now that $p< \dim X$. That means that we can find a chain $F_0\subsetneq \cdots \subsetneq F_p \subsetneq F_{p+1}$ of closed irreducible subsets of $X$. We then have $F_{p+1} = \bigcup_{i=1}^n F_{p+1}\cap X_i$, but $F_{p+1}$ is irreducible, hence $F_{p+1}=F_{p+1}\cap X_i$ for some $i$. Hence we have $F_{p+1}\subseteq X_i$, and hence $X_i$ now has a chain of length $p+1$, i.e. $\dim X_i > \sup\sim X_i$, which of course is absurd. Hence $\dim X=p$. 
+\end{proof}
+
+Recall that if $X$ is an algebraic variety, then $X=\bigcup_{i=1}^n F_i$, where $F_i$ is irreducible closed and does not contain each other. Thus we usually reduce to studying dimension of irreducible algebraic varieties. 
+
+\subsection{Relation to Krull dimension}
+
+For an ring $R$ we define its Krull dimension to be $\kdim R = \sup\{n\in \Z \vert p_0\subsetneq \cdots \subsetneq p_n\}$ where the $p_i$'s are prime ideals of $R$. In other words, the Krull dimension is the maximal length of a chain of prime ideals. 
+
+\begin{proposition}
+Let $V$ be an affine algebraic variety. Then $\dim V = \kdim \Gamma(V)$.
+\end{proposition}
+\begin{proof}
+Using the Nullstellensatz, there is a correspondence between closed irreducible subsets of $V$ and prime ideals in $\Gamma(V)$. A chain on one side of this correspondence immediately gives a chain of the same length on the other side.  
+\end{proof}
+
+\begin{example}
+Let $V=k^n$, hence $\Gamma(V)=k[X_1, \ldots, X_n]$. Then 
+\begin{equation*}
+    V(X_1, \ldots, X_n)\subsetneq V(X_1, X_{n-1})\subsetneq \cdots \subsetneq V(X_1, X_2)\subsetneq V(X_1)
+\end{equation*}
+is a chain of length $n$ in $V$. This corresponds to the chain prime ideals
+\begin{equation*}
+    (X_1)\subsetneq (X_1, X_2) \subsetneq \cdots \subsetneq (X_1, \ldots, X_{n-1}\subsetneq (X_1, \ldots, X_n))
+\end{equation*}
+in $\Gamma(V)$. Hence $\dim V = \kdim \Gamma(V)\geq n$, as we don't yet know that these are maximal length chains.
+\end{example}
+
+Our goal is then to show what our intuition tells us, i.e. that $\dim k^n = n = \kdim k[X_0, \ldots, X_n]$. 
+
+\begin{lemma}[Noethers normalization lemma]
+Let $A$ be a finitely generated $k$-algebra. There exists algebraically independent elements $y_1, \ldots, y_r \in A$ such that $A$ is integral over $k[y_1, \ldots, y_r]$. 
+\end{lemma}
+
+\begin{example}
+Let $x$ denote the image of $X$ in $k[X, Y]/(XY)$. Then $k[X, Y]/(XY)$ is integral over $k[x]$.
+\end{example}
+
+Note that the number of these algebraically independent elements used in Noethers normalization lemma is going to be the dimension. 
+
+\begin{theorem}[The dimension theorem]
+Let $A$ be a domain that is also a finite type $k$-algebra. Then $\kdim A = \trdg_k \Fr(A)$, where $\Fr(A)$ is the fraction field of $A$. 
+\end{theorem}
+\begin{proof}
+Noether normalization gives us an injection
+\begin{equation*}
+    k[y_1, \ldots, y_r] \hookrightarrow A
+\end{equation*}
+The extension $k\rightarrow k(y_1, \ldots, y_r)=\Fr(k[y_1, \ldots, y_r])$ has transcendence degree $r$. 
+
+Since $A$ is a finitely generated domain over $k[y_1, \ldots, y_r]$ we have by the Going up theorem that 
+\begin{equation*}
+    \kdim A = \kdim k[y_1, \ldots, y_r]
+\end{equation*}
+Hence it is enough to consider the proof for $k[y_1, \ldots, y_r]$. 
+
+Our strategy is to show that $k[y_1, \ldots, y_r]$ has no chain of prime ideals with length greater than $r$. We do this by induction on $r$. For $r=0$ this is ok.
+
+Assume $r>0$ and that there exists a chain $p_0\subsetneq \ldots \subsetneq p_m$ for some $m>r$. Choose an element $a_1\in p_1\setminus p_0$. Since $a_1\in k[y_1, \ldots, y_r]$ is not a constant polynomial there is ``a lemma'' that says there exists $a_2, \ldots, a_r \in k[y_1, \ldots, y_r]$ such that $k[y_1, \ldots, y_r]$ is finitely generated over $k[a_1, \ldots, a_r]$. We then have
+\begin{center}
+\begin{tikzcd}
+{k[Z_1, \ldots, Z_r]} \arrow[d, two heads] \arrow[r, "f.g."] & {k[y_1, \ldots, y_r]} \arrow[d, two heads] \\
+{k[Z_1, \ldots Z_r]/(Z_1)} \arrow[r, "f.g.", dotted]                 & {k[y_1, \ldots, y_r]/p_1}                 
+\end{tikzcd}    
+\end{center}
+where the top map sends $Z_i$ to $a_i$. 
+
+Notice also that $k[Z_1, \ldots Z_r]/(Z_1) \cong k[Z_2, \ldots Z_r]$. Now, say we have a chain $q_1\subsetneq \cdots \subsetneq q_m$ in $k[Z_2, \ldots Z_r]$. Then the going down theorem makes sure we have a chain $\overline{p_1}\subsetneq \cdots \subsetneq \overline{p_m}$. By induction we must have that $m-1\leq r-1$ i.e. that $m\leq r$, which contradicts our assumption that $m>r$. 
+\end{proof}
+
+\begin{corollary}
+We have $\kdim k[X_1, \ldots, X_n]=n$.
+\end{corollary}
+
+\begin{corollary}
+If $V$ is an irreducible affine algebraic variety, then $\dim V < \infty$. 
+\end{corollary}
+
+\begin{corollary}
+We have $\dim k^n = n$.
+\end{corollary}

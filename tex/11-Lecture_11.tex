@@ -1,0 +1,144 @@
+
+
+\section{Lecture 11 - 16.02.21}
+
+\subsection{Sheaves of rings}
+
+The main type of sheaves we will use in this course is sheaves of rings. This is because they play an important role in defining schemes later, which will be our generalization of affine and projective algebraic sets in order to properly count multiplicity of intersection. We have already defined sheaves, and thereby sheaves of rings, i.e. $Ring$-valued sheaves, but to really hit the nail on the head we go through it again. Note that all rings mentioned will be commutative and have a multiplicative identity. 
+
+\begin{definition}[Sheaf of rings]
+A sheaf of rings is a sheaf $\F$ on a topological space $X$ such that for each open set $U\subseteq X$ we have that $\F(U)$ is a ring, and that the restriction maps $\F(U)\longrightarrow \F(V)$ for any $V\subseteq U$ is a ring homomorphism. 
+\end{definition}
+
+If we in the above definition let $X=\{x\}$ be a singleton space, then we see that a sheaf of rings on $X$ is really just a choice of a ring $R$. Hence the study of sheaves of rings vastly generalize the study of rings. 
+
+\begin{definition}[Ringed space]
+A ringed space, denoted $(X, \O_X)$, consists of a topological space $X$ and a sheaf of rings $\O_X$, called the structure sheaf on $X$. 
+\end{definition}
+
+Recall that for a sheaf $\F$ on a space $X$ we defined the stalk at a point $p\in X$ to be the set $\F_p = \lim_{p\in U}\F(U) = \{[U,f]\}/\sim = \{ f_p\}$. 
+\begin{problem}
+Let $\F$ be a sheaf of rings and $p$ a point in $X$. Show that $\F_p$ is a ring. 
+\begin{solution}
+Let $[U, f], [V, g]$ be to elements in $\F_p$. Since $U, V$ are open sets there exists an open set $W\subseteq U\cap V$ containing $p$. Notice that $[W, f_{\vert W}]$ is a representative for the same class as $[U, f]$, similarly for $[W, g_{\vert W}]$. But now both $f_{\vert W}$ and $g_{\vert W}$ are elements in $\F(W)$, which we know is a ring because $\F$ is a sheaf of rings. Hence $f_{\vert W}\cdot g_{\vert W}$ is well defined and satisfies all the ring axioms. 
+\end{solution}
+\end{problem}
+
+For a ring $R$ we can study its modules. These are abelian groups $M$ together with an action from $R$, i.e. a map $R\times M\longrightarrow M$. We just noted that sheaves of rings are a generalization of just rings, so for this generalization to be nice we really should be able to study some sort of modules on sheaves of rings. Luckily we can just generalize the module axioms into the world of sheaves to get what we want. 
+
+\begin{definition}[$\O_X$-modules]
+Let $(X, \O_X)$ be a ringed space. An $\O_X$-module $\F$ is a sheaf of abelian groups such that $\F(U)$ is an $\O_X(U)$-module with action $\alpha_U$ for all open $U\subseteq X$, such that 
+\begin{center}
+\begin{tikzcd}
+\O(U)\times \F(U)  \arrow[d, "{res^{\O_X}_{U, V}\times res^{\F}_{U, V}}"'] \arrow[r, "\alpha_U"] & \F(U) \arrow[d, "{res^{\F}_{U,V}}"] \\
+\O(V)\times \F(V) \arrow[r, "\alpha_V"]                                                          & \F(V)                              
+\end{tikzcd}
+\end{center}
+commutes for all open sets $V\subseteq U$. 
+\end{definition}
+
+If we again choose $X=\{x\}$ we see that the study of $\O_X$-modules vastly generalize the study of modules over rings. 
+
+\begin{problem}
+Let $(X, \O_X)$ be a ringed space and $\F$ an $\O_X$-module. Show for every $p\in X$ that $\F_p$ is an $(\O_X)_p = \O_{X, p}$ module. 
+\end{problem}
+
+\todo[inline]{solution}
+
+
+\subsection{Morphisms of sheaves}
+
+For the following discussion we let $\C$ be a nice, concrete category. 
+
+\begin{definition}
+Let $\F$, $\G$ be $\C$-valued sheaves on a topological space $X$. A morphism $\phi\colon\F\longrightarrow\G$ consists of morphisms $\phi(U)\colon\F(U)\longrightarrow\G(U)$ in $\C$ for all open sets $U\subseteq X$, such that 
+\begin{center}
+\begin{tikzcd}
+\F(U)  \arrow[d, "{res^{\F}_{U, V}}"'] \arrow[r, "\phi_U"] & \G(U) \arrow[d, "{res^{\G}_{U,V}}"] \\
+\F(V) \arrow[r, "\phi_V"]                                & \G(V)                              
+\end{tikzcd}
+\end{center}
+commutes for all open sets $V\subseteq U$. 
+\end{definition}
+
+We define an isomorphism of sheaves to be a morphism with a two-sided inverse.
+
+Note that a morphism $\phi\colon\F\longrightarrow\G$ of sheaves on a space $X$ induces a morphism on stalks $\phi_p\colon\F_p\longrightarrow\G_p$ for all $p\in X$. This is because a morphism of sheaves gives us maps $\F(U)\longrightarrow\F(G)$ that respect restriction for all open sets containing $p$. Hence we have a morphism of directed systems 
+\begin{center}
+\begin{tikzcd}
+\vdots \arrow[d]                                           & \vdots \arrow[d]                     \\
+\F(U) \arrow[r, "\phi(U)"] \arrow[d, "{res^{\F}_{U, V}}"'] & \G(U) \arrow[d, "{res^{\G}_{U, V}}"] \\
+\F(V) \arrow[d, "{res^{\F}_{V, W}}"'] \arrow[r, "\phi(V)"] & \G(V) \arrow[d, "{res^{\G}_{V, W}}"] \\
+\F(W) \arrow[r, "\phi(W)"] \arrow[d]                       & \G(W) \arrow[d]                      \\
+\vdots                                                     & \vdots  
+\end{tikzcd}
+\end{center}
+A morphism of directed systems induces a morphism on its direct limit, which is the definition of the stalk at $p$, i.e. a map $\lim_{p\in U}\F(U)\longrightarrow \lim_{p\in U}\G(U)$. 
+
+\begin{problem}
+Let $[U, f]\in \F_p$. Where does it go under the map $\phi_p$? Why is it well defined?
+\end{problem}
+\todo[inline]{Solution}
+
+\begin{proposition}
+Let $\phi\colon\F\longrightarrow\G$ be a morphism of sheaves of abelian groups on a space $X$. Then $\phi$ is an isomorphism if and only if each induced morphism on stalks $\phi_p$ is an isomorphism. 
+\end{proposition}
+\begin{proof}
+Assume that $\phi$ is an isomorphism of sheaves. This means that $\phi(U)\colon\F(U)\longrightarrow\G(U)$ is an isomorphism for all open sets $U\subseteq X$. Since each $\phi_p$ is a direct limit of a direct system of isomorphisms it is again an isomorphism. 
+
+Assume now that $\phi_p$ is an isomorphism of abelian groups for all $p$. If we had inverses $\phi^{-1}(U)\colon\G(U)\longrightarrow\F(U)$ for all $U$ we could collect these together to form an inverse $\phi^{-1}$. Hence it is enough to show that $\phi(U)$ is an isomorphism for all open sets $U\subseteq X$. 
+
+We start by showing that $\phi$ is injective. Let $f\in \F(U)$ and suppose $\phi(U)(f)=0$. This means that for all $p\in U$ we have $\phi(U)(f)_p=0$. We have $\phi(U)(f)_p = \phi_p(f_p)$ and since $\phi_p$ is assumed injective we must have $f_p=0$ for all $p$. This means that we for all $p\in U$ can find an open set $W_p$, containing $p$, such that $f_{\vert W_p} = 0$. We can find a cover of $U$ using these $W_p$, i.e. $U=\cup_{p\in U}W_p$. Since $\F$ is a sheaf it must satisfy the glueability axiom, which means that $f=0$. This is because the gluing is unique, and $f_{\vert W_p} = 0_{\vert W_p}$ on all $W_p$'s, hence $f=0$ as $0_{\vert W_p}$ glues back to $0$. This means that the only element that gets sent to zero is the zero element, which means $\phi(U)$ is injective. 
+
+Surjectivity is a little trickier, but let's try our best. Suppose $g\in \G(U)$. For each $p\in U$ we let $g_p\in \G_p$ be its germ at $p$. Since $\phi_p$ is assumed surjective we can find $f_p\in \F_p$ such that $\phi_p(f_p)=g_p$. Since $\phi_p(f_p)=g_p$ we can find a small neighbourhood $V_p\subseteq U$ containing $p$ such that $\phi(V_p)(f'_p)=g_{\vert V_p}$, where $f'_p\in \F(V_p)$ is a representative for $f_p$ in $V_p$. 
+
+These sets $V_p$ form a cover for $U$, i.e. $U=\cup_{p\in U}V_p$. We want to apply the glueability axiom for the sheaf $\G$, and to do that we need to have $f'_{p\vert V_p\cap V_q} = f'_{q\vert V_p\cap V_q}$. Both of these gets sent to $g_{\vert V_p\cap V_q}$ by the map $\phi(V_p\cap V_q)$, which we above proves is injective. Hence $f'_{p\vert V_p\cap V_q} = f'_{q\vert V_p\cap V_q}$. By glueability there exists a section $f\in \F(U)$ such that $f_{\vert V_p}=f'_p$. 
+
+Finally we need to check that this glued together section $f$ actually maps to $g$ under $\phi(U)$. We have $\phi(U)(f)_{\vert V_p} = g_{\vert V_p}$, and hence by the unique glueability in $\G$ we must have $\phi(U)(f)=g$. Hence every $g\in \G(U)$ gets hit by an $f\in \F(U)$ by $\phi(U)$, which means that it is surjective. 
+
+Since $\phi(U)$ is both injective and surjective it must be an isomorphism, which is what we wanted to show. 
+\end{proof}
+
+
+
+\subsection{Kernels, cokernels and images}
+
+Let $\phi\colon\F\longrightarrow\G$ be a morphism of sheaves of abelian groups on a topological space $X$. 
+
+\begin{definition}
+The presheaf kernel of $\phi$, denoted $\Ker\phi$, is the assignment of the abelian group $\Ker \phi(U)$ to every open set $U\subseteq X$. 
+\end{definition}
+
+\begin{definition}
+The presheaf image of $\phi$, denoted $\Ima\phi$, is the assignment of the abelian group $\Ima \phi(U)$ to every open set $U\subseteq X$. 
+\end{definition}
+
+\begin{definition}
+The presheaf cokernel of $\phi$, denoted $\Cok\phi$, is the assignment of the abelian group $\Cok \phi(U)$ to every open set $U\subseteq X$. 
+\end{definition}
+    
+\begin{problem}
+Show that these assignments are functors, i.e. that they are again presheaves. 
+\end{problem}
+\begin{problem}
+Show that $\Ker\phi$ is a sheaf. 
+\end{problem}
+
+In general $\Ima\phi$ and $\Cok\phi$ are not sheaves. To fix this we introduce the notion of sheafification of a presheaf. This will allow us to define the image and cokernel sheaf by sheafifying their respective presheaves. 
+
+\begin{proposition}
+Let $\F$ be a presheaf on a topological space $X$. There is a sheaf $\F^+$, unique up to unique isomorphism, and a morphism $\theta\colon\F\longrightarrow \F^+$ such that for any other sheaf $\G$ we have
+\begin{center}
+\begin{tikzcd}
+\F \arrow[r] \arrow[d] & \F^+ \arrow[ld, "\exists!", dotted] \\
+\G                     &                                    
+\end{tikzcd}
+\end{center}
+i.e. that any other map into a sheaf factorizes through $\F^+$.
+\end{proposition}
+
+The proof of this will be given next time. 
+
+\begin{definition}[Sheafification]
+Let $\F$ be a presheaf on a topological space $X$. We define the sheafification of $\F$ to be the sheaf $\F^+$ as in the proposition above. 
+\end{definition}

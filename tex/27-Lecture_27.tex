@@ -1,0 +1,131 @@
+
+
+
+
+\section{Lecture 27 - 03.05.21}
+
+We return to the structure sheaf of $Spec A$. 
+
+Recall that we defined for an open set $U\subseteq Spec A$
+\begin{equation*}
+    \O(U) = \{s\colon U\to \coprod_{p\in U}A_p | 1. \text{ and } 2.\}
+\end{equation*}
+where 
+\begin{enumerate}
+    \item $s(p)\in A_p$
+    \item for each $p\in U$ there exists a neighborhood $V\subset U\cap D(f)$ around $p$, and elements $a,f\in A$, such that for all $q\in V$ with $f\notin q$ then $s(q)=q/f \in A_q$. 
+\end{enumerate}
+Note that this coproduct happens in the category of sets, so it is just disjoint union. 
+
+\todo[inline]{add picture}
+
+We need to check that $\O(U)$ is a ring, as we want it to be a sheaf of rings. Let $s,t\in \O(U)$. Define 
+\begin{itemize}
+    \item $(s+t)(p) = s(p)+t(p) \in A_p$
+    \item $(s\cdot t)(p) = s(p)\cdot t(p)\in A_p$
+\end{itemize}
+
+Notice that point 1. is immediate, so we show point 2.
+
+We know that for all $p$ there exists elements $a', f' \in A$ and neighborhood $V'\subseteq U\cap D(f')$ of $p$ such that $s_{|V'} = a'/f'$. Take again another such elements $a'', f''$. 
+
+For $s+t$ we set $V=V'\cap V''\subseteq U\cap D(f')\cap D(f'') = U\cap D(f'f'')$. For all $q\in V$, $(s+t)(q) = \frac{a'}{f'} + \frac{a''}{f''} = \frac{a'f''+a''f'}{f'f''} \in A_q$. 
+
+If we set $a = a'f''+a''f'$ and $f = f'f''$ then all is well defined. 
+
+For $s\cdot t$ we again let $V = V'\cap V''$ and set $a = a'a''$ and $f = f'f''$. Thus we get $(s\cdot t)(q) = \frac{a'}{f'}\cdot \frac{a''}{f''} = \frac{a'a''}{f'f''}$, which shows that it is well defined. 
+
+The unit $1\colon U\longrightarrow \coprod_{p\in U}A_p$ is defined by $1(p) = 1_{A_p}\in A_p$. Thus we can now check that $\O(U)$ is a commutative ring with identity, with the operations defined above. 
+
+We also need to check that $\O$ is a sheaf. So let $V\subseteq U$ be open sets. There is a map $\O(U)\to \O(V)$ given by sending $s$ to $s_{|V}$, i.e. restriction. It is a ring homomorphism as 
+\begin{align*}
+    (s+t)_{|V} &= s_{|V} + t_{|V} \\
+    (s\cdot t)_{|V} &= s_{|V}\cdot t_{|V}
+\end{align*}
+
+Together with the fact that point 1. and 2. are local conditions, this shows that $\O$ is a presheaf. Let then $U=\bigcup_{i\in I}U_i$ be an open cover and suppose $s_i\in \O(U_i)$ such that $s_{i|U_u\cap U_j} = s_{j|U_i\cap U_j}$. 
+
+Define $s\colon U\longrightarrow \coprod_{p\in U}A_p$ by $s(p) = s_{|U_i}(p)$, where $U_i$ is some set in $\{U_i\}$ that contains $p$. We can check that $s\in \O(U)$. Also, $s$ is uniquem hence we actually have a sheaf of rings. 
+
+\begin{definition}
+The spectrum of $A$ is defined as $(Spec A, \O)$ where $\O$ is the above sheaf of rings. 
+\end{definition}
+
+\begin{example}
+Let $A = k[x]_{(x)}$. Then $Spec A = \{ (0), (x)\}$. 
+
+The closed sets are $\{ V((x))=\{(x)\}, V((0))=Spec A, V(A)=\emptyset \}$, and the open sets are $\{ D(x)=\{(0)\}, D(0) = \emptyset, D(1) = Såec A \}$, hence we notice that all open sets are distinguished. 
+
+We have
+\begin{align*}
+    \O(D(x)) 
+    &= \{ s\colon \{(0)\}\to A_{(0)}|1. \text{ and } 2.\} \\
+    &= A_{(0)} \\
+    &= k[x]_{(0)} \\
+    &= k(x) = \{ \frac{p(x)}{q(x)}|p,q\in k[x], q\neq 0 \} \\
+    &= (k[x]_{(x)})_x
+\end{align*}
+and 
+\begin{align*}
+    \O(D(0)) 
+    &= 0 \\
+    &= A_0
+\end{align*}
+and
+\begin{align*}
+    \O(D(1)) 
+    &= \{ s\colon Spec A\to A_{(0)} \cup A|1. \text{ and } 2. \} 
+\end{align*}
+where this last ring is isomorphic to just $A = A_1$ by the morphism $\psi \colon A\to \O(D(1)), a\mapsto s_a$, where $s_a(p) = a/1$. It is injective because if $s_a = 0$ then 
+\begin{equation*}
+    0 = s_a((x)) = a\in A_{(x)}
+\end{equation*}
+but here $A_{(x)} = A$, hence $a=0$. 
+
+For surjectivity we assume $s\in \O(D(1))$. The point 2. says there exists elements $a,f\in A$ and an open set $V\subseteq D(1)$ around $(x)$ such that for all $q\in V$ we have $s(q)=a/f$. But $Spec A = V \subseteq Spec A\cap D(f)$, so if $f$ is a unit in $A$ then $a/f = f^{-1}a/1$. Hence $\psi(s_{f^{-1}a} = s$. 
+\end{example}
+
+\begin{proposition}
+For any $f\in A$ we have that $\O(D(f))\cong A_f$. 
+\end{proposition}
+
+\begin{example}[]
+$Spec k[x]$
+\todo[inline]{Do example}
+\end{example}
+
+\begin{example}[]
+$Spec k[x,y]$
+\todo[inline]{Do example}
+\end{example}
+
+\begin{proposition}
+There is a fully faithful functor
+\begin{equation*}
+    Var(k)\longrightarrow Sch(Spec k)
+\end{equation*}
+\end{proposition}
+
+\begin{problem}
+Look at some $k$-algebras and compare how they look as varieties vs schemes. 
+\end{problem}
+
+The analogue to projective varieties is the proj construction. 
+
+Let $S$ be a graded ring $\bigoplus_{d\geq 0}S_d$. Define 
+\begin{equation*}
+    Proj S = \{ h\subseteq S | h \text{ homogeneous }, \bigoplus_{d>0}S_d \nsubseteq h \}
+\end{equation*}
+
+We can then define sets $V(a) = \{ p\in Proj S|a\subseteq p \}$ for homogeneous ideals $a$ in $S$. These sets again form the Zariski closed sets on a topology on $Proj S$. 
+
+We can define a sheaf of rings $\O$ on $Proj S$ by letting $D^+(f) = \{p\in Proj S | f\notin p\}$ where $f\in \bigoplus_{d>0}S_d$. These form a basis for the topology on $Proj S$. So defining
+\begin{equation*}
+    \O(D^+(f) = (S_f)_0
+\end{equation*}
+where $(-)_0$ means the degree zero component, gives a sheaf on $Proj S$. 
+
+This makes $(Proj S, \O)$ into a scheme. 
+
+The scheme $Proj k[X_0, \ldots, X_n]$ is a scheme, whose subspace of closed points is homeomorphic to $\P^n(k)$. 
+

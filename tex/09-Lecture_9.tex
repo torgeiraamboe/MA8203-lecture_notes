@@ -1,0 +1,135 @@
+
+\section{Lecture 9 - 09.02.21}
+
+\subsection{Motivation on sheaves}
+
+We start by some motivation as to why we would need something more that just affine and projective algebraic sets.
+
+The first clue is that the correspondence between affine algebraic sets and reduced finite type $k$-algebras does not include a lot of rings that we would like to study using the same techniques. 
+For example:
+\begin{itemize}
+    \item $\Z$ and $\Z[i]$ (They are not $k$-algebras)
+    \item $k(x)$ and $k[x]_{(x)}$, being all rational functions and rational functions defined at $0$ respectively (they are not finite type  $k$-algebras)
+\end{itemize}
+
+We would also like to study multiplicity of points. For example $V=V(Y-X^2)\cap V(Y)$. We can study this by looking at its coordinate ring $\Gamma(V)$. We find the ideal first:
+\begin{align*}
+    I(V(Y-X^2)\cap V(Y))
+    &= I(V(Y-X^2, Y)) \\
+    &= I(V(X^2, Y)) \\
+    &= \sqrt{(X^2, Y)} \\
+    &= (X, Y), 
+\end{align*}
+where the second to last equality is due to the affine nullstellensatz. We then get $\Gamma(V) \cong k[X, Y]/(X, Y) \cong k$, which is a 1-dimensional $k$-algebra. This means that we just counted the intersection point once, even though the zero has multiplicity 2. So the coordinate ring forgets multiplicity. 
+
+What if we instead didn't take the radical? Then we would get $\Gamma \cong k[X, Y]/(X^2, Y)\cong k[X]/(X^2)$ which is a 2-dimensional $k$-algebra. This means we have counted multiplicity right! But, this algebra is not reduced, as the ideal is not radical. 
+
+What we want is a correspondence between all commutative rings, and something geometric, more general than affine algebraic sets. In this way we can count multiplicity right, we can study rings geometrically and more interesting stuff we will get to later. These geometric objects are called affine schemes. 
+
+To make the definition of an affine scheme we need one more tool, namely sheaves. Let's see some motivation on these to get a feeling for what they are and why they are needed. 
+
+For affine algebraic sets $V$ we had a correspondence with $\Gamma(V)$ which were the ring of functions on $V$. In the projective case, i.e. for a projective algebraic set $V$, this $\Gamma_{homog}(V)$ did not have elements that were functions on $V$. To solve this we recall that $\P^n(k)=D^+(X_0)\cup\cdots \cup D^+(X_n)$, i.e. projective space is locally affine. So maybe we could define functions on these affine spaces and glue them together to form functions on the projective space?
+
+Sadly this does not work.. Lets see an example of why. 
+
+\begin{example}
+We look at $\P^1(k)$, which is covered by $D^+(X)$ and $D^+(Y)$. Here $D^+(X)$ are the points $[a:b]$ where $a$ is non-zero, meaning we can look at just $[a:b]=[1:\frac{b}{a}]$. Now $D^+(X)$ is isomorphic to $k$ through the isomorphism $\phi([a:b])=\frac{b}{a}$, with inverse $\phi^{-1}(c)=[1:c]$. Similarily $D^+(Y)$ consists on points $[a:b]\in \P^1(k)$ such that $b$ is non-zero. We again write $[a:b]=[\frac{a}{b}:1]$ and an isomorphism $\psi:D^+(Y)\longrightarrow k$ defined by $\psi([a:b])=\frac{a}{b}$ with inverse $\psi^{-1}(c)=[c:1]$. 
+
+A function $f:D^+(X)\longrightarrow k$ is ``good'' if the induced function $\overline{f}: k\longrightarrow k$, defined such that $f([a:b])=\overline{f}(\frac{b}{a})$, is a polynomial function. Similarly $g:D^+(Y)\longrightarrow k$ is ``good'' if the induced function $\overline{g}: k\longrightarrow k$, defined such that $g([a:b])=\overline{g}(\frac{a}{b})$ is polynomial. 
+
+To get a polynomial function on $\P^1(k)$ these two functions $f$ and $g$ would need to agree on the intersection $D^+(X)\cap D^+(Y)$. This means that for $[a:b]\in D^+(X)\cap D^+(Y)$ we need $\overline{f}(\frac{b}{a}) = \overline{g}(\frac{a}{b})$. Since these are polynomial we get 
+\begin{equation*}
+    a_n(\frac{b}{a})^n+\ldots +a_1(\frac{b}{a})+a_0 = b_m(\frac{a}{b})^m+\ldots +b_1(\frac{a}{b})+b_0.
+\end{equation*}
+By clearing the denominators we get 
+\begin{equation*}
+    a_nb^{n+m} + a_{n-1}b^{n+m-1}a+\ldots +a_0b^ma^n - b_ma^{n+m}-b_{m-1}a^{n+m-1}b-\ldots-b_0b^ma^n = 0
+\end{equation*}
+
+And since $k$ is infinite this means that $a_i = 0 = b_i$ for all $i>0$. The resulting equation is then $a_0-b_0=0$, which means that $f$ and $g$ were the same constant functions. 
+
+Hence all global functions on $\P^1(k)$ are constant. 
+\end{example}
+
+We want a more encompassing notion of function than just constant functions, so wee need to expand to looking at locally defined functions instead of globally defined ones. This leads us directly to the notion of a sheaf. 
+
+\subsection{Definition and examples}
+
+We first study the sheaf of $k$-valued functions on a topological space. Let $X$ be a topological space and let $U, V$ be open sets in $X$. Let further $\F(U)$ and $\F(V)$ denote the set of functions on $U$ and $V$ respectively. Note that if we have $V\subseteq U$, then a function $f\in \F(U)$ defines a function on $V$ by restriction, i.e. $f_{\vert V}\in \F(V)$. Suppose we have an open set $U$ that decomposes into two open sets, $U=U_0\cup U_1$. If we have functions $f_0\in \F(U_0)$ and $f_1\in \F(U_1)$ such that $f_{0\vert U_0\cap U_1}=f_{1\vert U_0\cap U_1}$, then there exists an unique function $f\in \F(U)$ with $f_{\vert U_i}=f_i$. This means that functions on the decomposition glue together to a function on the union. 
+
+These are all the things we want a sheaf to be. An assignment some set to all open sets on a topological space, such that we have restriction and nice gluing. We remarked earlier that functions are too restrictive, so we don't want to restrict $\F(U)$ to being functions in our proper definition. Before we define a sheaf properly we need some other definitions. 
+
+\begin{definition}[Category of open sets]
+Let $X$ be a topological space. We define $Open(X)$ to be the category consisting of 
+\begin{itemize}
+    \item Objects: Open sets in $X$
+    \item Morphisms:
+    \begin{equation*}
+        Hom(V, U) = 
+        \begin{cases}
+            V\subseteq U, & \text{ if } V\subseteq U \\
+            \emptyset, & \text{ if } V\nsubseteq U
+        \end{cases}
+    \end{equation*}
+\end{itemize}
+\end{definition}
+
+
+
+\begin{definition}[Presheaf]
+Let $X$ be a topological space and $\C$ be some concrete category \footnote{Most often either $Grp$, $Ring$, $Mod\Lambda$ or $Set$, but could in theory be any.}. A $\C$-valued presheaf on $X$ is a contravariant functor $\F:Open(X)\longrightarrow \C$.
+\end{definition}
+
+This means in particular that 
+\begin{itemize}
+    \item For each $U\in Open(X)$ we have an object $\F(U)\in \C$. 
+    \item If $V\subseteq U$ then we have a map $\F(V\subseteq U)=res_{U,V}\colon\F(U)\longrightarrow \F(V)$ which we call restriction.
+    \item If $W\subseteq V\subseteq U$, then $res_{U, W} = res_{V, W}\circ res_{U, V}$.
+    \item $res_{U, U} = Id_{\F(U)}$. 
+\end{itemize}
+
+Since our intuition comes from the image of $\F$ geing a set of functions, we denote $res_{U, V}(f)=f_{\vert V}$ for $f\in \F(U)$. 
+
+\begin{definition}[Sheaf]
+A $\C$-valued presheaf $\F$ on a topological space $X$ is called a sheaf if it satisfies the following property, which we call the gluability or gluing property. 
+
+If $U\in Open(X)$ is covered by $\{U_i\}_{i\in I}$, where $U_i\in Open(X)$, then for any choice of $f_i\in \F(U_i)$ such that $f_{i\vert U_i\cap U_j} = f_{j\vert U_i\cap U_j}$, there exists a unique $f\in \F(U)$ with $f_{\vert U_i}=f_i$ for all $i\in I$. 
+\end{definition}
+
+We often denote $\F(U) = \Gamma(U, \F)$ and call elements sections of $\F$ over $U$. 
+
+\begin{example}[The sheaf of continuous real-valued functions]
+Let $X$ be a topological space. Define a contravariant functor $\O:Open(X)\longrightarrow Ring$ by $\O(U)=\{ f:U\rightarrow R \vert f \text{ continuous}\}$. This is a ring by defining addition and multiplication pointwise. 
+
+Claim: This is a sheaf. 
+
+\begin{proof}
+We first show that it is a presheaf, and then show it satisfies the gluability condition. 
+\begin{itemize}
+    \item For each $U\in Open(X)$ we have that $\O(U)$ is a ring, as defined above. 
+    \item If $V\subseteq U$, then $\O(U)\longrightarrow \O(V)$ defined by $f\longmapsto f_{\vert V}$ is continuous. This is because for any open set $W\subset \R$ we have $f^{-1}(W)\subset U$ is open, meaning that $f_{\vert V}^{-1}(W) = f^{-1}(W)\cap V$ is also open, and hence $f_{\vert V}$ continuous. 
+    \item If we have $W\subseteq V\subseteq U$, then for any $f\in \O(U)$ we have $(f_{\vert V})_{\vert W} = f_{\vert W}$. 
+    \item If $f\in \O(U)$ for some $U\in Open(X)$, then $f_{\vert U} = f$, meaning that $res_{U, U}=Id_{\O(U)}$. 
+\end{itemize}
+
+The above points show that $\O$ is a presheaf. Assume now that $U=\cup_{i\in I}U_i$ is an open set in $X$ covered by a family of open sets $\{U_i\}_{i\in I}$. Suppose that $f_i\in \O(U_i)$ for all $i\in I$ such that $f_{i\vert U_i\cap U_j} = f_{j\vert U_i\cap U_j}$. We need to show there exists a unique map $f:U\longrightarrow \R$ such that $f_{\vert U_i} = f_i$. 
+
+We define $f$ by $f(x)=f_i(x)$ if $x\in U_i$. This is well defined because of the fact that the maps $f_i$ agree on the overlaps of sets in the open cover. For some open set $W\subseteq \R$ we have that $f^{-1}(W) = \cup_{i\in I}f_i^{-1}(W)$. This set is open because $f_i^{-1}(W)$ open since $f_i$ continuous, and arbitrary union of open sets is again open. Hence $f$ is continuous. 
+
+Assume that we have two maps $f, g\in \O(U)$ such that $f_{\vert U_i}=f_i = g_{\vert U_i}$. Since $\{U_i\}$ is a cover we know that all $x\in U$ lie at least in one of the $U_i$'s. We assume $x\in U_i$. Then \begin{equation*}
+    f(x)=f_{\vert U_i}(x) = f_i(x)=g_{\vert U_i}(x) = g(x)
+\end{equation*}
+holds for all points $x\in U$, hence $f=g$. This shows that the map $f$ we found above is unique, and hence that $\O$ is a sheaf. 
+\end{proof}
+\end{example}
+
+We also want to see a non-example, to get a feeling on where things might go wrong. 
+\begin{example}[Non-example]
+Let $X=\R$ be our topological space and define $\mathscr{P}:Open(X)\longrightarrow Ring$ by $\mathscr{P}(U)=\{ f:U\rightarrow \R \vert f \text{ is bounded} \}$. We claim that $\mathscr{P}$ is a presheaf, but not a sheaf. 
+
+\begin{proof}
+The restriction of a bounded function is again bounded, hence we in fact have a presheaf. It is not a sheaf as we can define $f_i=Id_{U_i}$, where $U_i = (i-1, i+1)$. We have $\cup U_i = \R$, but the $f_i$'s glue to $f=Id_\R$, which is not a bounded function. 
+\end{proof}
+\end{example}
+
+

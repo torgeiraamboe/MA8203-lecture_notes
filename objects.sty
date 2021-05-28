@@ -1,0 +1,204 @@
+
+\ProvidesPackage{objects}
+
+
+
+
+\newcounter{mathenv}[section]                                               % Telleren mathenv holder styr på miljønummeret, og resettes ved nytt kapittel
+\setcounter{mathenv}{1}                                                     % Start på 1
+\renewcommand\themathenv{\arabic{section}.\arabic{mathenv}}                 % Kommandoen \themathenv printer "kapittelnummer + punktum + mathenv" i arabic (vanlige tall)
+
+
+
+\newenvironment{theorem}[1][]{%
+	\index{#1}
+    \refstepcounter{mathenv}%                                               % Oppdater mathenv-telleren
+	\vspace{3mm}    
+    \ifstrempty{#1}%                                                        % Ifsetning om []-opsjonen er tom (miljøet tar potensielt 1 opsjon)
+    {\mdfsetup{%                                                            % frametitle bestemmer utseendet til den fylte navneboksen
+            frametitle={%                                                   % %
+                \tikz[baseline=(current bounding box.east),outer sep=0pt]   % % Første del av if, dersom ingen opsjon
+                \node[anchor=east,rectangle,fill=black!20]                  % %
+                {\strut Theorem~\themathenv};}}%                             %
+    }%
+    {\mdfsetup{%                                                            %
+            frametitle={%                                                   % %
+                \tikz[baseline=(current bounding box.east),outer sep=0pt] % % % Andre del av if, med opsjon -- #1 printer opsjonsvariabelen
+                \node[anchor=east,rectangle,fill=black!20]%                 % %
+                {\strut Theorem~\themathenv:~#1};}}%                         %
+    }%
+    \mdfsetup{innertopmargin=0pt,linecolor=black!20,middlelinewidth=2pt,%   %
+        roundcorner=10pt,topline=true,%                                     % % Oppsettet av selve boksen som omringer innholdet
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}                   %
+    \begin{mdframed}[]\relax%                                               % Begynn mdframed-miljøet
+}{\end{mdframed}}                                                           % Avslutt mdframed-miljøet
+
+
+
+\newenvironment{lemma}[1][]{%
+	\refstepcounter{mathenv}%
+	\vspace{3mm}	
+	\ifstrempty{#1}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=black!20]
+		{\strut Lemma~\themathenv};}}%
+	}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt] \node[anchor=east,rectangle,fill=black!20]
+		{\strut Lemma~\themathenv:~#1};}}%
+	}%
+	\mdfsetup{innertopmargin=0pt,linecolor=black!20,middlelinewidth=2pt,%
+        roundcorner=10pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+	\begin{mdframed}[]\relax%
+}{\end{mdframed}}
+
+
+
+\newenvironment{corollary}[1][]{%
+	\refstepcounter{mathenv}%
+	\vspace{3mm}	
+	\ifstrempty{#1}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=black!20]
+		{\strut Corollary~\themathenv};}}%
+	}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt] \node[anchor=east,rectangle,fill=black!20]
+		{\strut Corollary~\themathenv:~#1};}}%
+	}%
+	\mdfsetup{innertopmargin=0pt,linecolor=black!20,middlelinewidth=2pt,%
+        roundcorner=10pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+	\begin{mdframed}[]\relax%
+}{\end{mdframed}}
+
+
+
+\newenvironment{proposition}[1][]{%
+	\refstepcounter{mathenv}%
+	\vspace{3mm}	
+	\ifstrempty{#1}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=black!20]
+		{\strut Proposition~\themathenv};}}%
+	}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt] \node[anchor=east,rectangle,fill=black!20]
+		{\strut Proposition~\themathenv:~#1};}}%
+	}%
+	\mdfsetup{innertopmargin=0pt,linecolor=black!20,middlelinewidth=2pt,%
+        roundcorner=10pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+	\begin{mdframed}[]\relax%
+}{\end{mdframed}}
+
+
+
+\newenvironment{definition}[1][]{%
+	\index{#1}
+	\refstepcounter{mathenv}%
+	\vspace{3mm}
+	\ifstrempty{#1}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=black!20]
+		{\strut Definition~\themathenv};}}%
+	}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt] \node[anchor=east,rectangle,fill=black!20]
+		{\strut Definition~\themathenv:~#1};}}%
+	}%
+	\mdfsetup{innertopmargin=0pt,linecolor=black!20,middlelinewidth=2pt,%
+        roundcorner=10pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+	\begin{mdframed}[]\relax%
+}{\end{mdframed}}
+
+\renewenvironment{example}[1][]{%
+	\refstepcounter{mathenv}%
+	\vspace{3mm}
+	\mdfsetup{linecolor=black,linewidth=0.4pt}%
+	\begin{mdframed}%
+	\ifstrempty{#1}{%
+		\strut \textbf{Example~\themathenv~}%
+	}{
+		\strut \textbf{Example~\themathenv}~(#1)\textbf{.}~\par%
+	}%
+	}%
+{\end{mdframed}}
+
+% Problem- og solution-miljø, der problemteksten er skråstilt, og solution-miljøet printer "Løsning:"
+
+\newenvironment{problem}[1][]{%
+	\refstepcounter{mathenv}%
+	\vspace{3mm}
+	\mdfsetup{linecolor=black,linewidth=0.4pt}%
+	\begin{mdframed}%
+	\ifstrempty{#1}{%
+		\strut \textbf{Problem~\themathenv~}%
+	}{
+		\strut \textbf{Problem~\themathenv}~(#1)\textbf{.}~%
+	}%
+	}%
+{\end{mdframed}}
+\newenvironment{solution}{\par\noindent\textbf{Solution:}\par\noindent\ignorespaces}{} % \par og \noindent gir sammen ny linje (paragraf) uten innrykk
+
+\newenvironment{remark}{\par\noindent\textbf{Remark:}}{}
+
+% Navn til cleveref for de forskjellige miljøene
+
+\crefname{mathenv}{theorem}{theorems}
+\crefname{lemma}{lemma}{lemma}
+\crefname{corollary}{corollary}{corollaries}
+\crefname{proposition}{proposition}{propositions}
+\crefname{definition}{definition}{definitions}
+\crefname{example}{example}{examples}
+\crefname{problem}{problem}{problems}
+
+% Et problem oppstod siden alle miljøene bruker samme teller, nemlig mathenv, og cleveref kan bare kjenne til ett miljønavn for én teller.
+% Løsningen er følgende (geniale!) kode, hentet herfra
+% http://tex.stackexchange.com/questions/175961/theorem-and-lemma-sharing-counter-with-mdframed-and-cleveref
+% Koden under lager først navn til cleveref, og så redefinerer den miljøene slik at de spesifikke cleverefnavnene kalles lokalt hver gang.
+
+\let\tempCorollary\corollary
+\renewcommand{\corollary}{%
+	\crefalias{mathenv}{corollary} %mathenv counter ser nå ut som corollary
+	\tempCorollary%
+}%
+\let\tempLemma\lemma
+\renewcommand{\lemma}{%
+	\crefalias{mathenv}{lemma} %mathenv counter ser nå ut som lemma
+	\tempLemma%
+}%
+\let\tempProposition\proposition
+\renewcommand{\proposition}{%
+	\crefalias{mathenv}{proposition} %mathenv counter ser nå ut som proposisjon
+	\tempProposition%
+}%
+\let\tempDefinition\definition
+\renewcommand{\definition}{%
+	\crefalias{mathenv}{definition} %mathenv counter ser nå ut som definition
+	\tempDefinition%
+}%
+\let\tempExample\example
+\renewcommand{\example}{%
+	\crefalias{mathenv}{example} %mathenv counter ser nå ut som example
+	\tempExample%
+}%
+\let\tempProblem\problem
+\renewcommand{\problem}{%
+	\crefalias{mathenv}{problem} %mathenv counter ser nå ut som example
+	\tempProblem%
+}%

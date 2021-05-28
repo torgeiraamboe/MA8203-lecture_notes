@@ -1,0 +1,77 @@
+\select@language {english}
+\contentsline {section}{About}{1}{section*.1}
+\contentsline {section}{\numberline {1}Lecture 1 - 12.01.21}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}Administrative information and setup}{4}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Introduction}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Intersection of curves}{9}{subsection.1.3}
+\contentsline {section}{\numberline {2}Lecture 2 - 18.01.21}{10}{section.2}
+\contentsline {subsection}{\numberline {2.1}Affine algebraic sets}{10}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}The ideal of an affine algebraic set}{13}{subsection.2.2}
+\contentsline {section}{\numberline {3}Lecture 3 - 19.01.21}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}Irreducibility}{16}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Hilbert's nullstellensatz}{18}{subsection.3.2}
+\contentsline {section}{\numberline {4}Lecture 4 - 25.01.21}{21}{section.4}
+\contentsline {subsection}{\numberline {4.1}Applications of Hilbert's nullstellensatz}{21}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}First steps towards Bezout's theorem}{23}{subsection.4.2}
+\contentsline {section}{\numberline {5}Lecture 5 - 26.01.21}{24}{section.5}
+\contentsline {subsection}{\numberline {5.1}Introduction to morphisms}{25}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Projective algebraic sets}{27}{subsection.5.2}
+\contentsline {section}{\numberline {6}Lecture 6 - 01.02.21}{29}{section.6}
+\contentsline {section}{\numberline {7}Lecture 7 - 02.02.21}{30}{section.7}
+\contentsline {subsection}{\numberline {7.1}Projective algebraic sets}{30}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Homography}{31}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}What does projective space look like?}{31}{subsection.7.3}
+\contentsline {section}{\numberline {8}Lecture 8 - 08.02.21}{36}{section.8}
+\contentsline {subsection}{\numberline {8.1}Projective algebraic sets}{36}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Ideal of a projective algebraic set}{37}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}The cone construction}{38}{subsection.8.3}
+\contentsline {section}{\numberline {9}Lecture 9 - 09.02.21}{41}{section.9}
+\contentsline {subsection}{\numberline {9.1}Motivation on sheaves}{41}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Definition and examples}{42}{subsection.9.2}
+\contentsline {section}{\numberline {10}Lecture 10 - 15.02.21}{46}{section.10}
+\contentsline {subsection}{\numberline {10.1}Stalks and germs}{47}{subsection.10.1}
+\contentsline {section}{\numberline {11}Lecture 11 - 16.02.21}{50}{section.11}
+\contentsline {subsection}{\numberline {11.1}Sheaves of rings}{50}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}Morphisms of sheaves}{51}{subsection.11.2}
+\contentsline {subsection}{\numberline {11.3}Kernels, cokernels and images}{53}{subsection.11.3}
+\contentsline {section}{\numberline {12}Lecture 12 - 22.02.21}{55}{section.12}
+\contentsline {subsection}{\numberline {12.1}Sheafification}{55}{subsection.12.1}
+\contentsline {subsection}{\numberline {12.2}Sheaves and varieties}{59}{subsection.12.2}
+\contentsline {section}{\numberline {13}Lecture 13 - 23.02.21}{60}{section.13}
+\contentsline {subsection}{\numberline {13.1}The structural sheaf}{60}{subsection.13.1}
+\contentsline {subsection}{\numberline {13.2}Algebraic varieties}{61}{subsection.13.2}
+\contentsline {subsection}{\numberline {13.3}Projective algebraic varieties}{63}{subsection.13.3}
+\contentsline {section}{\numberline {14}Lecture 14 - 01.03.21}{64}{section.14}
+\contentsline {section}{\numberline {15}Lecture 15 - 02.03.21}{65}{section.15}
+\contentsline {subsection}{\numberline {15.1}Sheaves of modules on varieties}{65}{subsection.15.1}
+\contentsline {subsection}{\numberline {15.2}Projective varieties}{67}{subsection.15.2}
+\contentsline {section}{\numberline {16}Lecture 16 - 08.03.21}{69}{section.16}
+\contentsline {subsection}{\numberline {16.1}Dimension}{69}{subsection.16.1}
+\contentsline {subsection}{\numberline {16.2}Relation to Krull dimension}{70}{subsection.16.2}
+\contentsline {section}{\numberline {17}Lecture 17 - 09.03.21}{73}{section.17}
+\contentsline {subsection}{\numberline {17.1}Dimension and counting equations}{74}{subsection.17.1}
+\contentsline {section}{\numberline {18}Lecture 18 - 16.03.21}{78}{section.18}
+\contentsline {subsection}{\numberline {18.1}Morphisms and dimension}{78}{subsection.18.1}
+\contentsline {section}{\numberline {19}Lecture 19 - 22.03.21}{82}{section.19}
+\contentsline {subsection}{\numberline {19.1}Motivation for tangent spaces}{82}{subsection.19.1}
+\contentsline {subsection}{\numberline {19.2}Tangent spaces}{83}{subsection.19.2}
+\contentsline {section}{\numberline {20}Lecture 20 - 23.03.21}{88}{section.20}
+\contentsline {subsection}{\numberline {20.1}Regular local rings}{91}{subsection.20.1}
+\contentsline {subsection}{\numberline {20.2}Curves}{91}{subsection.20.2}
+\contentsline {section}{\numberline {21}Lecture 21 - 12.04.21}{93}{section.21}
+\contentsline {subsection}{\numberline {21.1}Intersection multiplicity}{93}{subsection.21.1}
+\contentsline {section}{\numberline {22}Lecture 22 - 13.04.21}{98}{section.22}
+\contentsline {subsection}{\numberline {22.1}B\IeC {\'e}zout's theorem}{98}{subsection.22.1}
+\contentsline {section}{\numberline {23}Lecture 23 - 19.04.21}{104}{section.23}
+\contentsline {section}{\numberline {24}Lecture 24 - 20.04.21}{105}{section.24}
+\contentsline {subsection}{\numberline {24.1}Sheaf cohomology}{105}{subsection.24.1}
+\contentsline {subsubsection}{\numberline {24.1.1}Cech cohomology}{105}{subsubsection.24.1.1}
+\contentsline {subsection}{\numberline {24.2}Vanishing theorems}{108}{subsection.24.2}
+\contentsline {section}{\numberline {25}Lecture 25 - 26.04.21}{109}{section.25}
+\contentsline {subsection}{\numberline {25.1}Riemann-Roch theorem}{109}{subsection.25.1}
+\contentsline {section}{\numberline {26}Lecture 26 - 27.04.21}{115}{section.26}
+\contentsline {subsection}{\numberline {26.1}Schemes}{115}{subsection.26.1}
+\contentsline {section}{\numberline {27}Lecture 27 - 03.05.21}{119}{section.27}
+\contentsline {section}{\numberline {28}Lecture 28 - 04.05.21}{122}{section.28}
+\contentsline {section}{\numberline {A}Appendix A}{123}{appendix.A}
+\contentsline {subsection}{\numberline {A.1}Alternative proof of Hilbert's nullstellensatz}{123}{subsection.A.1}
