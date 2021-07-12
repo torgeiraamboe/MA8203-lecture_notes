@@ -1,36 +1,35 @@
 \section{Lecture 1 - 12.01.21}
 
-\subsection{Administrative information and setup}
-\begin{itemize}
-    \item Treat classes over zoom as a normal class.
-    \item We will meet Mondays and Tuesdays from 10.15 to 12.00. Classes will not be recorded.
-    \item The exam will be oral, possibly digital.
-    \item It will be based on what is done in class, so if one wants to take the exam one should be present in most classes. The focus on the exam will be on the problems given throughout the course.
-    \item The course will somewhat closely follow the book \textit{Algebraic Geometry - An introduction} by Daniel Perrin.  
-\end{itemize}
+
+%\subsection{Administrative information and setup}
+%\begin{itemize}
+%    \item Treat classes over zoom as a normal class.
+%    \item We will meet Mondays and Tuesdays from 10.15 to 12.00. Classes will not be recorded.
+%    \item The exam will be oral, possibly digital.
+%    \item It will be based on what is done in class, so if one wants to take the exam one should be present in most classes. The focus on the exam will be on the problems given throughout the course.
+%    \item The course will somewhat closely follow the book \textit{Algebraic Geometry - An introduction} by Daniel Perrin.  
+%\end{itemize}
 
 
 
 Algebraic geometry is the study of algebraic varieties, which are roughly the zero loci of polynomials over fields. It is an old theory, spanning way back, but the focus of this course will be on the more modern theory developed by the likes of J.P. Serre and A. Grothendieck during the last half of the 20'th century. 
 
-Throughout the course $k$ will be a field, usually algebraically closed, or at least infinite. The motivating examples will be $\mathbb{C}$ and $\mathbb{R}$. We will start by studying affine algebraic varieties, and later projective varieties, which are locally modeled by the affine ones. 
+Throughout the course $k$ will be a field, usually algebraically closed, or at least infinite. The motivating examples will be $\mathbb{C}$ and $\mathbb{R}$. We will start by studying affine algebraic varieties, and later more general algebraic varieties and projective varieties, which are both locally modeled by the affine ones. 
+
 
 \subsection{Introduction}
 
 Let $P\in k[X_1, \ldots X_n]$, i.e. a polynomial in $n$ variables over a field $k$. Define its zero locus to be the set $V(P) = \{ x\in k^n \vert P(x)=0 \}\subset k^n$. This set $V(P)$ is roughly what we mean by an algebraic variety. More generally we can use a set of polynomials instead of just one. Let $P=\{ P_i\}$ be a collection of polynomials in $k[X_1, \ldots, X_n]$. We define the zero locus of the polynomials to be $V(P) = \{ x\in k^n \vert P_i(x)=0, \forall i\}$. 
 
-A subset $X\subset k^n$ is also an affine algebraic variety if $X = V(P)$ for some set of polynomials $P=\{ P_i\}$ in $k[X_1, \ldots, X_n]$. Really this is what we call an affine algebraic set, but we will get back to this in lecture 2. 
+A subset $X\subset k^n$ is also an affine algebraic variety if $X = V(P)$ for some set of polynomials $P=\{ P_i\}$ in $k[X_1, \ldots, X_n]$. Really this is what we call an affine algebraic set, but we will get back to this in lecture 2 when we take on some more proper definitions. 
 
-
-
-
-\subsubsection*{Examples}
+A really simple example is given by linear subspaces.
 
 \begin{example}
 If the $P_i$'s all have degree 1, then $V(P)$ are affine linear subspaces of $k^n$, i.e. liner, planes and hyperplanes. 
 \end{example}
 
-Let $n=2$ and $k=\mathbb{R}$. Then the zero locus of a single polynomial $P(X, Y)$ is a real plane curve. 
+Another class of important intuition giving examples are planar curves, which often looks like the graph of a single polynomial in one variable. More specifically, if we let $n=2$ and $k=\mathbb{R}$, then the zero locus of a single polynomial $P(X, Y)$ is a real plane curve.  These will be important for this course, and can in many cases serve as nice intuition for these algebraic varieties. A concrete simple example is a line.  
 
 \begin{example}
 An example of such a curve is $P(X, Y) = X-Y$, which has zero locus being the line $f(x)=x$ in the plane, i.e.
@@ -40,6 +39,7 @@ An example of such a curve is $P(X, Y) = X-Y$, which has zero locus being the li
 \end{center}
 \end{example}
 
+The above example uses a polynomial of degree one, and so must describe a line, but we can have polynomials with higher degrees - making more interesting algebraic varieties.  
 
 \begin{example}
 If we require the polynomial to be of degree 2, then we can have $P(X, Y)=X^2+Y^2-1$, which has zero locus equal to the unit circle in $\mathbb{R}^2$. 
@@ -49,6 +49,8 @@ If we require the polynomial to be of degree 2, then we can have $P(X, Y)=X^2+Y^
 \end{center}
 \end{example}
 
+We see in the above example that a planar curve does not always have to be the graph of a single polynomial, as the circle requires more two one-variable polynomials to describe it as its curves. 
+
 \begin{example}
 Another example in degree 2 is $P(X, Y) = y-x^2$, which has zero locus equal to the graph of $f(x)=x^2$.
 \begin{center}
@@ -56,6 +58,8 @@ Another example in degree 2 is $P(X, Y) = y-x^2$, which has zero locus equal to 
 \input{inkscape/parable.pdf_tex}
 \end{center}
 \end{example}
+
+We need not stop at polynomials of degree two, and the higher degree we get, the more complicated - and interesting - the planar curves get. 
 
 \begin{example}
 If we have degree 3 polynomials we have for example $P(X, Y)=Y^2-X^3$ which have zero locus being a cuspidal curve.
@@ -65,6 +69,10 @@ If we have degree 3 polynomials we have for example $P(X, Y)=Y^2-X^3$ which have
 \end{center}
 \end{example}
 
+The above curve has a singularity, which we will come back to later in the course. Figuring out what a singularity is mathematically and not just intuitively by looking at the curve is a bit tricky, so it will take some rigorous exploration of dimension theory to do it. More on this in several weeks. 
+
+Such singularities need not be only of the form above, they can also come from self-intersecting curves, like the following example. 
+
 \begin{example}
 Another degree 3 example is $P(X, Y) = X^3+Y^3 - XY$, which has a loop shaped zero locus. 
 \begin{center}
@@ -73,29 +81,38 @@ Another degree 3 example is $P(X, Y) = X^3+Y^3 - XY$, which has a loop shaped ze
 \end{center}
 \end{example}
 
-\begin{example}
-A more famous degree 3 example are elliptic curves, for example
-\begin{center}
-\def\svgwidth{0.4\textwidth}
-\input{inkscape/singular_cubic.pdf_tex}
-\end{center}
-\end{example}
+There exists a certain class of planar curves, which are all non-singular, i.e. they have none of these singularities or self intersections. They are famously connected to several different important mathematical theories including number theory and cryptography - namely the elliptic curves. 
 
 \begin{example}
-Some higher degree examples include the trefoil curve, $P(X,Y)=(X^2+Y^2)^2 + 3X^2Y-Y^3$, 
+The below curve is the elliptic curve given by [Some polynomial]
+%\begin{center}
+%\def\svgwidth{0.4\textwidth}
+%\input{inkscape/singular_cubic.pdf_tex}
+%\end{center}
+\end{example}
+\todo[inline]{fix image of the elliptic curve}
+
+As we said, the higher the degree the more complicated the planar curve, but lets see some nice higher degree curves anyway. 
+
+
+\begin{example}
+One example is the trefoil-curve, given by the polynomial $P(X,Y)=(X^2+Y^2)^2 + 3X^2Y-Y^3$:
 \begin{center}
 \def\svgwidth{0.4\textwidth}
 \input{inkscape/trefoil.pdf_tex}
 \end{center}
-    
-and the quadrafoil curve $P(X, Y) = (X^2+Y^2)^2-4X^2Y^2$.
+The polynomial $P$ has degree four. 
+\end{example}
+
+\begin{example}    
+Another degree four example is the quadrafoil curve, given by the polynomial $P(X, Y) = (X^2+Y^2)^2-4X^2Y^2$.
 \begin{center}
 \def\svgwidth{0.4\textwidth}
 \input{inkscape/quadrafoil.pdf_tex}
 \end{center}
 \end{example}
 
-If we let $n=3$ and still have $k=\mathbb{R}$ then the zero loci of single polynomials are surfaces. If we have degree 2 polynomials we get the quadratic surfaces we know from calculus. 
+Ok, until now we have almost only seen planar curves, which is only a fraction of the possible algebraic varieties. One way to get other objects is to try to make ``curves'' in higher dimensions. If we for example let $n=3$ and still have $k=\mathbb{R}$ then the zero loci of single polynomials are surfaces. If we first restrict ourselves to polynomials of degree 2, we get the quadratic surfaces we know and love from calculus. 
 
 \begin{example}
 The most recognized quadratic surface is maybe the zero locus of $P(X, Y, Z) = X^2+Y^2+Z^2-1$, which is equal to the unit sphere in $\mathbb{R}^3$
@@ -113,17 +130,24 @@ Another example of a surface is given by $P(X, Y, Z) = X^2+Y^2-Z^2-1$ which has 
 \end{center}
 \end{example}
 
-Let us still consider $n=3$ and $k=\mathbb{R}$. If we instead of just a single polynomial have two polynomials we get the space-curves as their zero loci. 
+So just looking at the zero-locus of a single polynomial already produces a rich and interesting theory, as we can study both elliptic curves, cubic surfaces and many many more. 
+
+To round off the examples, we consider an algebraic variety given by two polynomials. We still consider $n=3$ and $k=\mathbb{R}$, but now the zero-loci of these two polynomialsgives us the space-curves.
 
 \begin{example}
 An example is the zero locus $V=\{(x,y,z)\in \mathbb{R}^3 \vert x^2+y^2-z^2-1 = 0, y=0\}$, which is the part of the previous hyperboloid lying in the $xz$-plane
 \end{example}
+\todo[inline]{Make graphics for this example}
 
-\textbf{Note: } This study depends very much on which field we work in. We mentioned that we are going to mostly assume that our field is algebraically closed. This places an emphasis on the equations defining our varieties, rather than their actual points. 
+\textbf{Note: } This study depends very much on which field we work in. We mentioned that we are going to mostly assume that our field is algebraically closed. This places an emphasis on the equations defining our varieties, rather than their actual points. We will hopefully understand a bit better what this means later in the course, when we discuss schemes. 
 
 \subsection{Intersection of curves}
+
+We mentioned that the planar curves were very important for us, and we will now try to explain why. There is a famous important theorem, called Bézout's theorem, which this course will be centered around proving in detail. The theorem centeres around the following question.
+
 \textbf{Question:} How can two plane curves intersect?
 
+If we take a pause to think about it, the answer is quite simple. There are in general four ways two planar curves can intersect:
 \begin{enumerate}
     \item They can not intersect at all. 
     \item They can be tangent to each other, hence only intersect at a single point. 
@@ -131,24 +155,30 @@ An example is the zero locus $V=\{(x,y,z)\in \mathbb{R}^3 \vert x^2+y^2-z^2-1 = 
     \item They can be overlapping, and hence have a continuum of intersections.
 \end{enumerate}
 
-\textbf{Discuss in groups:} How does the number of intersections relate to the degrees of the curves? What are the maximum and minimum number of intersections? What are the special cases, and what is the general behavior?
+We shall mainly be interested in the third point - when two planar curves intersect at a finite number of points. As this number is finite, we would like to know which number it is. Is there a nice way to calculate this number? Is it related to other properties of the two planar curves? Bézout's theorem will give us a really satisfying answer to this. It arises from the following questions:
 
-Let $C$ and $C'$ be plane curves of degrees $d$ and $d'$  respectively. The natural questions that arise is the discussions are:
+\textbf{Questions:} How does the number of intersections relate to the degrees of the curves? What are the maximum and minimum number of intersections? What are the special cases, and what is the general behavior?
+
+Let $C$ and $C'$ be plane curves defined by polynomials of degrees $d$ and $d'$  respectively. If we take a little time to think about the above questions, we are quite naturally led to two more questions:
 
 \begin{itemize}
     \item Do $C$ and $C'$ always intersect in at most $dd'$ points?
     \item When is the number of intersection points equal to $dd'$?
 \end{itemize}
 
-There are three obstructions to the number of intersections being $dd'$. These are
+Intuitively there seems to be three obstructions to the number of intersections being $dd'$. These are
 \begin{enumerate}
     \item The curves have a common component, i.e. they have an infinite number of intersection points
     \item The curves have no overlap, for example two parallel lines
     \item The curves are tangent, and can therefore have less intersection points
 \end{enumerate}
 
+So, if we remove all these obstructions, we should have a nice theorem that relates the number of intersection points to the product of the degrees of the planar curves, and this is exactly what Bézout's theorem is. 
+
 \begin{theorem}[Bézouts theorem]
 Let $C$ and $C'$ be two projective plane curves of degree $d$ and $d'$, defined over an algebraically closed field, with no common components. Then the number of intersections, counted with multiplicity, is $dd'$.
 \end{theorem}
 
-To formalize and prove this theorem is one of the main goals of this course. Notice that the three obstructions are naturally removed in the theorem, because no common components mean we have a finite number of intersections, projective curves mean we don't have parallel lines and counting with multiplicity means tangential curves are counted right.
+The fact that the three obstructions are naturally removed in the theorem is not an easy task to see just yet, as we have not properly discussed any of them. But, intuitively, no common components means we have a finite number of intersections, projective curves mean we don't have parallel lines and counting with multiplicity means tangential curves are counted right. 
+
+Defining these terms, formalizing the entire construction and proving this theorem will be the first - and biggest - goal for this course. 
